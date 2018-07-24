@@ -1,150 +1,232 @@
 @extends('Backend.layout.master')
-
 @section('title','Post')
 @section('content')
   <!-- page content -->
-  <div class="right_col" role="main">
-    <div class="">
-      <div class="page-title">
+  <div  role="main">
+    <div class="clearfix"></div>
 
-      <div class="">
-        <div class="col-md-8 col-lg-8 col-sm-7">
+    <!--------------------------------------------------------------------------->
+    <!------------- Left side content ------------------------------------------>
 
-
-          <!-------------------- /post ------------------------------------>
-
-          <div class="x_panel">
-            <div class="x_title">
-              <div class="bs-example">
-                <!----------------Image----------------->
-                <td> <img src="{{asset('storage/img/'.$post->img)}}"  style="max-width: 600px;"  alt="post image"> </td>
-                <p>{{$post->publish_date}} </p>
-              </div>
-
-              <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
+    <h4>
+      <a href="{{route('posts.index')}}">Posts</a> >
+      Post
+    </h4>
 
 
-              <h2>{{$post->title}}  </h2>
+    <!-------------------- /post ------------------------------------>
+    <!------------- Left side content ------------------------------------------->
+    <div class="col-md-7 col-sm-7 col-xs-12">
 
 
+      <!-------------------- /post ------------------------------------>
+      <div class="x_panel">
 
-                <div class="profile_pic" >
-                  <img style="max-width: 50px; height: 50px;" src="{{asset('storage/img/'.$post->img)}}" alt="..." class="img-circle">
-                  <span>{{$post->author_firstName}} </span> <span>{{$post->author_lastName}} </span>
-                </div>
-
-                <br/>
-              <p class="message"><br/><br/><br/>
-                <span>{{$post->description}} </span></span>
-              </p>
-
-              <p class="message"><br/><br/><br/>
-                <span>{{$post->content}} </span> <span><a href="{{$post->source}}"><i class="fa  fa-external-link"></i></a></span>
-              </p>
-
-              <div class="clearfix"></div>
-            </div>
-            <div class="clearfix"></div>
-
-            <div class="col-md-12">
-
-              <span class="label label-default">Default</span>
-              <span class="label label-primary">Primary</span>
-              <span class="label label-success">Success</span>
-              <span class="label label-info">Info</span>
-              <span class="label label-warning">Warning</span>
-              <span class="label label-danger">Danger</span>
-              <ul class="nav navbar-right panel_toolbox">
-
-                <div  data-container="body" data-toggle="popover" data-placement="left">
-
-                  <span style="margin-items: left;" class="badge bg-green">0 <i class="fa  fa-thumbs-o-up" aria-hidden="true"></i></span>
-                  <span style="margin-items: left;" class="badge bg-blue">{{$commentcount}} <i class="fa  fa-comment" aria-hidden="true"></i></span>
-                </div>
-              </ul>
-            </div>
-
-            <br/> <hr/> <br/>
-            <div class="clearfix"></div>
-
-            <!----------- Comments -------------------->
-          @if($commentcount > 0)
-
-              <div class="bs-example"    style="overflow: scroll;">
-                <div >
-                  <div class="x_panel">
-                    <div class="x_content">
-
-                      <table class="table table-striped">
-                        <thead>
-                        <tr>
-                          <th style="width: 20%">User</th>
-                          <th>Comment</th>
-                          <th style="width: 3%">Activation</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($comments as $comment)
-                        <tr>
-                          <td>
-                            <div class="profile_pic" >
-                              <img style="max-width: 50px; height: 50px;" src="{{asset('storage/img/'.$post->img)}}" alt="..." class="img-circle">
-
-                            </div>
-                          </td>
-                          <td>{{$comment->comment}}</td>
-                          <td>
-                            <!-- Split button -->
-                            <div class="btn-group">
-                              @if($comment->active === 1)
-                                <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Active</button>
-                              @else
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Passive</button>
-                              @endif
-
-                                <span class="sr-only">Toggle Dropdown</span>
-                              </button>
-                              <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{route('comments.destroy',$comment->id)}}">Active</a>
-                                </li>
-                                <li><a href="{{route('comments.destroy',$comment->id)}}">Passive</a>
-                                </li>
-                              </ul>
-                            </div>
-
-                          </td>
-                        </tr>
-                        @endforeach
-                        </tbody>
-                      </table>
-
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="clearfix"></div>
-
-            @endif
-          </div>
-
-          <!-------------------- /post ------------------------------------>
-
+        <div class="x_title">
+          <h2>Post</h2>
+          <div class="clearfix"></div>
         </div>
-        <!------------- /Left side content ------------------------------------------->
+        <div class="x_content">
+
+          <div class="bs-example" data-example-id="simple-jumbotron">
+
+            <div class="product-image">
+              <img src="{{asset('storage/'.$post->img)}}"  alt="Post Image"/>
+            </div><br/>
+            <h4> <b>{{$post->title}}</b></h4>
+            <p class="message">
+              {{$post->content}}
+            </p>
+            >
+
+            <br/>
+            <p class="message"><br/><br/><br/>
+              {{$post->content}}
+            </p>
+
+          </div>
+        </div>
+      </div>
+      <!-------------------- /post ------------------------------------>
+
+    </div>
+    <!------------- /Left side content ------------------------------------------->
+    <!--------------------------------------------------------------------------->
+
+
+    <!--------------------------------------------------------------------------->
+    <!------------- Right side content ------------------------------------------->
+    <div class="col-md-5 col-sm-5 col-xs-12">
+
+      <!-------------- tags --------------------------------------------->
+      <div class="x_panel">
+        <div class="x_title">
+          <h2>Post Details</h2>
+          <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+          <table class="table table-striped table-bordered">
+            <tr>
+              <th>Post Title</th>
+              <th>{{$post->title}}</th>
+            </tr>
+            <tr>
+              <th>Author Name</th>
+              <td>{{$post->author_firstName}}</td>
+            </tr>
+            <tr>
+              <th>Post Description</th>
+              <td>{{$post->description}}</td>
+            </tr>
+            <tr>
+              <th>Created at</th>
+              <td>{{$post->created_at}}</td>
+            </tr>
+            <tr>
+              <th>Updated at</th>
+              <td>{{$post->updated_at}}</td>
+            </tr>
+            <tr>
+              <th>Source URL</th>
+              <td>{{$post->source_url}}</td>
+            </tr>
+
+            <tr>
+              <th>Category</th>
+              <td>{{$post->category->name}}</td>
+            </tr>
+            <tr>
+              <th>Status</th>
+              <td>
+                <!-- Split button -->
+                <div class="btn-group">
+                  @if($post->active === 1)
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Active</button>
+                  @else
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Passive</button>
+                  @endif
+
+                  <span class="sr-only">Toggle Dropdown</span>
+
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="/admin/posts/{{$post->id}}/active">Active</a>
+                    </li>
+                    <li><a href="/admin/posts/{{$post->id}}/passive">Passive</a>
+                    </li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <!------------ /tags --------------------------------------------->
+
+    </div>
+    <!------------- /Right side content ------------------------------------------->
+    <!--------------------------------------------------------------------------->
+
+    <div class="clearfix"></div>
+    <!-------------------- /post ------------------------------------>
 
 
 
 
 
+
+
+
+
+
+
+
+
+    <!-------------------- comments ------------------------------------>
+    <div class="col-md-12">
+      <div class="x_panel ">
+        <div class="x_title">
+          <h3>Comments   <span style="margin-items: left; color:white;" class="badge bg-blue">{{$post->comments_count}} <i class="fa fa-comment" aria-hidden="true"></i></span></h3>
+          <div class="clearfix"></div>
+        </div>
+
+
+        <div class="x_content">
+          <!-- start project list -->
+          <table class="table">
+
+            <thead>
+            <tr>
+              <th>#</th>
+              <th >User Name</th>
+              <th>Comment</th>
+              <th>Likes</th>
+              <th>Dislikes</th>
+              <th>Active</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <!---------table row---------->
+            @foreach($post->comments  as $key=> $comment)
+              <tr>
+                <td>
+
+                  <!--#--> {{$key+1}} </td>
+                <!--User Name--> <td> {{$comment->user->name}} </td>
+                <!--Comment------> <td>{{$comment->comment}}</td>
+                <!--Likes-------->
+                <td>
+                  {{$comment->likes->pluck('like')->sum()}}
+                </td>
+                <!--Dislikes--------><td><a>{{$comment->likes->pluck('dislike')->sum()}}</a><br/> </td>
+                <!--Active------>
+                <td>
+                  <!-- Split button -->
+                  <div class="btn-group">
+                    @if($comment->active === 1)
+                      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Active</button>
+                    @else
+                      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Passive</button>
+                    @endif
+
+                    <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a href="/admin/comments/{{$comment->id}}/active">Active</a>
+                      </li>
+                      <li><a href="/admin/comments/{{$comment->id}}/passive">Passive</a>
+                      </li>
+                    </ul>
+                  </div>
+
+                </td>
+              </tr>
+            @endforeach
+            <!---------/table row---------->
+
+            </tbody>
+
+          </table>
+
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="clearfix"></div>
 
       </div>
       <div class="clearfix"></div>
-
     </div>
+
+
+
+
+
+
+
   </div>
   <!-- /page content -->
+
+
+
 
 @endsection

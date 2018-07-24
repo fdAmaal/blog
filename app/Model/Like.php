@@ -4,13 +4,16 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use App\User;
-use App\Model\Post;
+use App\Model\Comment;
 
 class Like extends Model
 {
-    public function post()
+    protected $fillable=['user_id','comment_id','like','dislike'];
+    protected $with = ['user'];
+
+    public function comment()
     {
-        return $this->belongsTo(Post::class);
+        return $this->belongsTo(Comment::class);
     }
 
     public function user()

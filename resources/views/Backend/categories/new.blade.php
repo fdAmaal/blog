@@ -26,18 +26,24 @@
                                 <div class="" role="tabpanel" data-example-id="togglable-tabs">
                                   <div id="myTabContent" class="tab-content">
                                     <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="post-tab">
-<!---------in-source Tab  -------------------------------------------------------------------------------------------------------------->
+
+<!----------------------------------------------------------------------------------------------------------------------->
                                     <form class="form-horizontal form-label-left" method="post" enctype="multipart/form-data" action="{{route('categories.store')}}">
 
                                         <input type="hidden" name="_token" value="{{csrf_token()}}">
 
 
+                                        <!--------Name--------------------->
                                           <div class="item form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                               <input id="name" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="category name" required="required" type="text">
                                             </div>
+                                              <p id="demo"></p>
+
+
+                                            <!--------Image------------------->
                                           </div>
                                           <div class="item form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="img">Image <span class="required">*</span>
@@ -47,6 +53,7 @@
                                             </div>
                                           </div>
 
+                                        <!---------Buttons ------------------------->
                                           <div class="ln_solid"></div>
                                           <div class="form-group">
                                             <div class="col-md-6 col-md-offset-3">
@@ -54,6 +61,21 @@
                                               <button id="send" type="submit" class="btn btn-success">Submit</button>
                                             </div>
                                           </div>
+
+                                        <!---------Validation script------------------------>
+                                        <script>
+                                            function validate() {
+                                                var x, text;
+                                                x = document.getElementById("name").value;
+
+                                                // If x is Not a Number or less than one or greater than 10
+                                                if (x < 1 || x > 50) {
+                                                    text = "category name too long";
+                                                }
+                                                document.getElementById("demo").innerHTML = text;
+                                            }
+                                        </script>
+                                        <!---------/Validation script------------------------>
                                           </form>
 
 

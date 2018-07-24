@@ -8,6 +8,10 @@
 			 <!--------------------------------------------------------------------------->
 			 <!------------- Left side content ------------------------------------------>
 
+     <h4>
+      Posts
+     </h4>
+
 			   <!-------------------- /post ------------------------------------>
         	  
               <div class="x_panel">
@@ -26,6 +30,7 @@
                           <th>Post Image</th>
                           <th >Category</th>   
                           <th>Post Title</th>
+                          <th>Comments Count</th>
                           <th>Active</th>
                           <th style="width: 20%">Edit</th>
                         </tr>
@@ -39,7 +44,8 @@
                           <!--Image--> <td> <img src="{{asset('storage/'.$post->img)}}" style="max-width: 100px; height: 50px;"  alt="Post Image"> </td>
                           <!--category------> <td>{{$post->name}}</td>
                           <!--Title--------><td><a>{{$post->title}}</a><br/> </td>
-                          <!--Active------>  <td> 
+                          <!--Title--------><td><a>{{$post->comments_count}}</a><br/> </td>
+                          <!--Active------>  <td>
                           @if($post->active === 1)
                             <div class="btn btn-success btn-xs">Active</div>
                           @else
@@ -49,12 +55,24 @@
                           <td>
                           <a href="{{route('posts.edit',$post->id)}}" class="btn btn-info"> Edit </a>
                           <a href="{{route('posts.show',$post->id)}}" class="btn btn-danger"> View </a>
-                              @if($post->active === 1)
-                                  <a href="/admin/posts/{{$post->id}}/passive" type="button" class="btn btn-default">Passive</a>
+                              <!-- Split button -->
+                              <div class="btn-group">
+                                  @if($post->active === 1)
+                                      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Active</button>
+                                  @else
+                                      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Passive</button>
+                                  @endif
 
-                              @else
-                                  <a htrf="/admin/posts/{{$post->id}}/active" type="button" class="btn btn-success">Active</a>
-                              @endif
+                                  <span class="sr-only">Toggle Dropdown</span>
+                                  </button>
+                                  <ul class="dropdown-menu" role="menu">
+                                      <li><a href="/admin/posts/{{$post->id}}/active">Active</a>
+                                      </li>
+                                      <li><a href="/admin/posts/{{$post->id}}/passive">Passive</a>
+                                      </li>
+                                  </ul>
+                              </div>
+
 
 
                           
@@ -64,11 +82,14 @@
                         <!---------/table row---------->
                        
                       @endforeach
+
                       
                       
                       </tbody> 
                     </table>
+
                     <div class="clearfix"></div>
+                    {{$posts->links()}}
               </div>	  
 		   <!------------- /Right side content ------------------------------------------>
 		   <!-------------------------------------------------------------------------->

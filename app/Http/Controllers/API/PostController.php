@@ -17,7 +17,8 @@ class PostController extends BaseController
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts=Post::join('categories', 'category_id', '=', 'categories.id')
+            ->select('posts.*', 'categories.name')->withCount('comments');
         return $this->sendResponse($posts->toArray(), 200);
     }
 
@@ -70,7 +71,6 @@ class PostController extends BaseController
     public function show($id)
     {
         $post = Post::find($id);
-
         if (is_null($post)) {
             return $this->sendError('Post not found.');
         }

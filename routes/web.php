@@ -1,45 +1,64 @@
 <?php
 
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
 //auth
     Auth::routes();
-    Route::get('/home', 'HomeController@index')->name('home');
+   // Route::get('/home', 'HomeController@index')->name('home');
+    //Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+    //Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
-
-Route::get('/', function(){
-    return view('Backend.index');//->middleware('auth');
-});
+/*
 //Backend
-    Route::get('/admin', function(){
-        return view('auth.adminLogin');//->middleware('auth');
-    });
-    Route::get('/admin/login', function(){
-        return view('auth.adminLogin');//->middleware('auth');
+Route::get('/', function(){
+    return view('auth.adminLogin');
+});
+
+Route::get('/login', function(){
+    return view('auth.adminLogin');
+});
+*/
+
+\Illuminate\Support\Facades\Auth::routes();
+
+// Admin routes
+Route::prefix('admin')->group(function() {
+
+    Route::get('/', 'Backend\HomeController@index');
+
+    Route::get('/home', function(){
+        return view('HomeController@index');
     });
 
-    Route::get('index', function(){
-        return view('Backend.index');//->middleware('auth');
-    });
-
-    Route::get('/admin/notifications', function(){
-        return view('Backend.notifications');//->middleware('auth');
+    Route::get('notifications', function(){
+        return view('Backend.notifications');
     });
 
     //categories
-        route::resource('/admin/categories','Backend\CategoriesController');//->middleware('auth');
-        route::get('/admin/categories/{id}/passive','Backend\CategoriesController@passive');//->middleware('auth');
-        route::get('/admin/categories/{id}/active','Backend\CategoriesController@active');//->middleware('auth');
+    Route::resource('categories','Backend\CategoriesController');
+    Route::get('/categories/{id}/passive','Backend\CategoriesController@passive');
+    Route::get('/categories/{id}/active','Backend\CategoriesController@active');
+    Route::get('categories/categoryPost/{id}','Backend\CategoriesController@post');
 
     //posts
-        route::resource('/admin/posts','Backend\PostsController');//->middleware('auth');
-        route::get('/admin/posts/{id}/passive','Backend\PostsController@passive');//->middleware('auth');
-        route::get('/admin/posts/{id}/active','Backend\PostsController@active');//->middleware('auth');
+    Route::resource('posts','Backend\PostsController');
+    Route::get('/posts/{id}/passive','Backend\PostsController@passive');
+    Route::get('/posts/{id}/active','Backend\PostsController@active');
 
     //comments
-        route::resource('/admin/comments','Backend\CommentsController');//->middleware('auth');
+    Route::resource('/comments','Backend\CommentsController');
+    Route::get('/comments/{id}/passive','Backend\CommentsController@passive');
+    Route::get('/comments/{id}/active','Backend\CommentsController@active');
 
     //users
-        route::resource('/admin/users','Backend\UsersController');//->middleware('auth');
+    Route::resource('users','Backend\UserController');
+    Route::get('/users/{id}/passive','Backend\UserController@passive');
+    Route::get('/users/{id}/active','Backend\UserController@active');
 
+});
 
 //Frontend
 

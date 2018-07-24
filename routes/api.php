@@ -20,4 +20,5 @@ Route::resource('/posts', 'API\PostController');
 Route::resource('/categories', 'API\CategoryController');
 Route::resource('/register', 'API\RegisterController');
 Route::resource('/comments', 'API\CommentController');
+Route::resource('/likes', 'API\LikeController');
 

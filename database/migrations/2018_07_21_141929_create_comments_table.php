@@ -20,7 +20,6 @@ class CreateCommentsTable extends Migration
             $table->integer('post_id')->unsigned();
             $table->foreign('post_id')->references('id')->on('posts');
             $table->text('comment');
-            $table->dateTime('publish_date');
             $table->boolean('active')->default(1);
             $table->timestamps();
         });

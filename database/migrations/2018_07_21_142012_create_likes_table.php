@@ -21,6 +21,7 @@ class CreateLikesTable extends Migration
             $table->foreign('comment_id')->references('id')->on('comments');
             $table->boolean('like')->default(0);
             $table->boolean('dislike')->default(0);
+            $table->timestamps();
         });
     }
 

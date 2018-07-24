@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\API\BaseController as BaseController;
 use App\Model\Post;
+use App\User;
+use DB;
+use Validator;
 use App\Model\Comment;
 use App\Model\Like;
 
@@ -52,7 +55,6 @@ class CommentController  extends BaseController
         }
 
         $comment = Comment::create($input);
-
         return $this->sendResponse($comment->toArray(), 200);
     }
 
@@ -64,13 +66,24 @@ class CommentController  extends BaseController
      */
     public function show($id)
     {
-        $post=Post::find($id);
-        $comments = $post->comments->withCount(['likes'])->with('dislikes')->find();
+        $post = Post::find($id);
+        $comments = $post->comments;
 
-        if (is_null($comments)) {
-            return $this->sendError('No Comments');
+        $likes = Like::where([
+            ['like', '=', '1'],
+            ['comment_id', '=', $comments->id],
+        ])->count();
+
+        $dislikes = Like::where([
+            ['dislike', '=', '1'],
+            ['comment_id', '=', $comments->id],
+        ])->count();
+
+        if (is_null($post)) {
+            return $this->sendError('Post not found.');
         }
-        return $this->sendResponse($post->toArray(), 200);
+
+        return $this->sendResponse( $comments, 200);
     }
 
     /**

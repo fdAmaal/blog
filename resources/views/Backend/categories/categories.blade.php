@@ -4,7 +4,9 @@
  <!-- page content -->
  <div  role="main">
             <div class="clearfix"></div>
-
+     <h4>
+         Categories
+     </h4>
 
 			   <!-------------------- /post ------------------------------------>
         	  
@@ -45,14 +47,25 @@
                           <td>
                           <a href="{{route('categories.edit',$category->id)}}" class="btn btn-info"> Edit </a>
                           <a href="{{route('categories.show',$category->id)}}" class="btn btn-danger"> view </a>
-                              @if($category->active === 1)
-                                  <a href="/admin/categories/{{$category->id}}/passive" type="button" class="btn btn-default">Passive</a>
+                              <!-- Split button -->
+                              <div class="btn-group">
+                                  @if($category->active === 1)
+                                      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Active</button>
+                                  @else
+                                      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Passive</button>
+                                  @endif
 
-                              @else
-                                  <a htrf="/admin/categories/{{$category->id}}/active" type="button" class="btn btn-success">Active</a>
-                              @endif
-                          
-                          
+                                  <span class="sr-only">Toggle Dropdown</span>
+                                  </button>
+                                  <ul class="dropdown-menu" role="menu">
+                                      <li><a href="/admin/categories/{{$category->id}}/active">Active</a>
+                                      </li>
+                                      <li><a href="/admin/categories/{{$category->id}}/passive">Passive</a>
+                                      </li>
+                                  </ul>
+                              </div>
+
+
                           </td>
                         </tr>
                         <!---------/table row---------->

@@ -3,8 +3,15 @@
 @section('title','Edit Post')
 @section('content')
   <!-- page content -->
+
   <div class="right_col" role="main">
+
+    <h4>
+      <a href="{{route('posts.index')}}">Posts</a> >
+      <a href="{{route('posts.show',$post->id)}}">{{$post->title}}</a> > Edit
+    </h4>
     <div class="">
+
 
       <div class="clearfix"></div>
 
@@ -54,8 +61,8 @@
                             <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="category">Category <span class="required">*</span></label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                               <select name="category" class=form-control col-md-7 col-xs-12">
+                              <option  value="{{$post->category_id}}">{{$post->name}}</option>
                               @foreach($categories as $key=> $category)
-
                                  <option  value="{{$category->id}}">{{$category->name}}</option>
                               @endforeach
 
@@ -116,14 +123,17 @@
                             </div>
                           </div>
 
-
                           <!------Active----------->
                           <div class="item form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="active">Active <span class="required">*</span></label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                               <select name="active" class=form-control col-md-7 col-xs-12">
-                              <option  value="1">Active</option>
-                              <option  value="0">Passive</option>
+                              @if($post->active === 1)
+                                <option  value="1">Active</option>
+                              @else
+                                <option  value="0">Passive</option>
+                              @endif
+
                               </select>
                             </div>
                           </div>

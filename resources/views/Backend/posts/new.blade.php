@@ -68,6 +68,27 @@
                                                 </div>
                                             </div>
 
+                                            <!-----------Tags--------------------------
+                                            <div class="item form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Content">Tags <span class="required">*</span>
+                                                </label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <input id="input-tags" required="required" name="tags" class="form-control col-md-7 col-xs-12"/>
+                                                </div>
+                                            </div>
+
+                                            <script type="text/javascript" src="selectize.js">
+                                                $('#input-tags').selectize({
+                                                    delimiter: ',',
+                                                    persist: false,
+                                                    create: function(input) {
+                                                        return {
+                                                            value: input,
+                                                            text: input
+                                                        }
+                                                    }
+                                                });
+                                            </script>-->
                                             <!-----------Image---------------------------->
                                             <div class="item form-group">
                                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="img">Post Image <span class="required">*</span>

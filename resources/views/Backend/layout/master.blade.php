@@ -14,6 +14,10 @@
 
     <title>@yield('title') </title>
 
+    <!-- Using Select2 from a CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
     <!-- Bootstrap -->
     <link href="{{asset('../vendors/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
     <!-- Font Awesome -->
@@ -46,12 +50,10 @@
             
             <!----------------------- menu profile quick info ---------------------->
             <div class="profile clearfix">
-              <div class="profile_pic">
-                <img src="storage/img/user.png" alt="..." class="img-circle profile_img">
-              </div>
-              <div class="profile_info">
-                <span>Welcome,</span>
-               <!-- <h2></h2>-->
+
+              <div class="profile_info" style="text-align: center;">
+                <span >Welcome,</span>
+               <h1>{{ Auth::user()->name }}</h1>
               </div>
             </div>
             <!----------------------- /menu profile quick info ---------------------->
@@ -64,11 +66,11 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a  href="index"><i class="fa fa-home"></i> Dashboard </a> </li>
-                  <li><a href="{{route('categories.index')}}"><i class="fa fa-user"></i> Categories</a></li>
+                  <li><a  href="index"><i class="fa  fa-tachometer"></i> Dashboard </a> </li>
+                  <li><a href="{{route('categories.index')}}"><i class="fa  fa-bookmark-o"></i> Categories</a></li>
                   <li><a href="{{route('posts.index')}}"><i class="fa fa-edit"></i> Posts </a></li>
-                  <li><a href="users"><i class="fa fa-user"></i> Users</a></li>    
-				          <li><a href="notifications"><i class="fa fa-user"></i> Notifications</a></li>
+                  <li><a href="users"><i class="fa  fa-users"></i> Users</a></li>
+				          <li><a href="notifications"><i class="fa  fa-bullhorn"></i> Notifications</a></li>
                 </ul>
               </div>
             </div>
@@ -89,7 +91,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li>
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="storage/img/user.png" alt="">
+                    <img src="storage/user.png" alt=""><i class="fa  fa-at"></i> {{ Auth::user()->name }}
 				   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     <li><a href="login"> Log Out</a></li>

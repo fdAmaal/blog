@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\Controller;
-use Image;
 use Illuminate\Support\Facades\Input;
 use App\Model\Category;
 use App\Model\Post;
+use App\Model\Comment;
 
 class CategoriesController extends Controller
 {
@@ -18,7 +19,6 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-
         $categories=Category::all();
         return view('Backend.categories.categories',compact('categories'));
     }
@@ -72,10 +72,13 @@ class CategoriesController extends Controller
      */
     public function show($id)
     {
-        $categories=Category::find($id);
-        $posts = $categories->posts;
-        $postcount = $categories->posts->count();
-        return view('Backend.categories.category',compact('posts','categories','postcount'));
+
+        $categories=Category::find($id)->withCount('posts')
+            ->where('id',$id)
+            ->get()->first();
+
+       $posts = $categories->posts;
+        return view('Backend.categories.category',compact('posts','categories'));
     }
 
     /**
@@ -134,8 +137,7 @@ class CategoriesController extends Controller
         $category=Category::find($id);
         $category->active=0;
         $category->save();
-        return redirect('/admin/$categories')
-            ->with('success',200);
+        return Redirect::back()->with('success', 'Category Activated successfully');
     }
 
     public function active($id)
@@ -143,7 +145,17 @@ class CategoriesController extends Controller
         $category=Category::find($id);
         $category->active=1;
         $category->save();
-        return redirect('/admin/$categories')
-            ->with('success',200);
+        return Redirect::back()->with('success', 'Category disactivated successfully');
+    }
+
+    public function post($id)
+    {
+        $post=Post::find($id)
+            ->join('categories', 'category_id', '=', 'categories.id')
+            ->select('posts.*', 'categories.name')->withCount('comments')
+            ->where('posts.id',$id)->get()->first();
+        $comments = $post->comments;
+        //return response()->json($post);
+        return view('Backend.categories.posts',compact('post','comments'));
     }
 }

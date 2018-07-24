@@ -4,8 +4,12 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\API\BaseController as BaseController;
+use App\Model\Like;
+use App\Model\Comment;
+use Validator;
 
-class LikeController extends Controller
+class LikeController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -39,7 +43,7 @@ class LikeController extends Controller
 
         $validator = Validator::make($input, [
             'user_id' => 'required',
-            'post_id' => 'required',
+            'comment_id' => 'required',
             'like' => 'required',
             'dislike' => 'required'
 
@@ -62,7 +66,15 @@ class LikeController extends Controller
      */
     public function show($id)
     {
-        //
+        $comment = Comment::find($id);
+        $likes = $comment->likes->count();
+        $dislikes = $comment->dislikes->count();
+        if (is_null($comment)) {
+            return $this->sendError('comment not found.');
+        }
+
+        return $this->sendResponse($likes,$dislikes, 200);
+
     }
 
     /**

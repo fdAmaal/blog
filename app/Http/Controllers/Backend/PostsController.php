@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Redirect;
 use DB;
 use Carbon\Carbon;
 use App\Model\Post;
@@ -20,11 +21,11 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts=DB::table('posts')
-            ->join('categories', 'category_id', '=', 'categories.id')
-            ->select('posts.*', 'categories.name')->orderBy('created_at', 'desc')
-            ->get();
-        return view('Backend.posts.posts',compact('posts'));
+        $posts=Post::join('categories', 'category_id', '=', 'categories.id')
+            ->select('posts.*', 'categories.name')->withCount('comments')->paginate(9);
+
+        return  view('Backend.posts.posts',compact('posts'));
+        //return response()->json($posts);
     }
 
     /**
@@ -75,10 +76,29 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        $post=Post::find($id);
+        $post=Post::with([
+            'category',
+            'comments' =>function($query){
+            $query->withCount(['likes']);
+            }
+        ])
+            ->withCount(['comments'])
+            ->findOrFail($id);
+
+        //dd($post);
+        return view('Backend.posts.post',compact('post'));
+
+
+       /* $post=Post::find($id)
+            ->join('categories', 'category_id', '=', 'categories.id')
+            ->select('posts.*', 'categories.name')->withCount('comments')
+            ->where('posts.id',$id)->get()->first();
+        /*$post=Post::with(['categories'])
+            ->withCount('comments')
+            ->where('posts.id',$id)
+            ->paginate(9);
         $comments = $post->comments;
-        $commentcount = $post->comments->count();
-        return view('Backend.posts.post',compact('post','comments','commentcount'));
+        return view('Backend.posts.post',compact('post','comments'));*/
     }
 
     /**
@@ -90,7 +110,11 @@ class PostsController extends Controller
     public function edit($id)
     {
         // using Eloquent method to edit data
-        $post=Post::find($id);
+
+        $post=Post::find($id)
+            ->join('categories', 'category_id', '=', 'categories.id')
+            ->select('posts.*', 'categories.name')
+            ->where('posts.id',$id)->get()->first();
         $categories=Category::all();
         return view('Backend.posts.edit',compact('post','categories'));
     }
@@ -143,8 +167,7 @@ class PostsController extends Controller
         $posts=Post::find($id);
         $posts->active=0;
         $posts->save();
-        return redirect('/admin/posts')
-            ->with('success',200);
+        return Redirect::back()->with('success', 'Post Activated successfully');
     }
 
     public function active($id)
@@ -152,7 +175,6 @@ class PostsController extends Controller
         $posts=Post::find($id);
         $posts->active=1;
         $posts->save();
-        return redirect('/admin/posts')
-            ->with('success',200);
+        return Redirect::back()->with('success', 'disactivated successfully');
     }
 }

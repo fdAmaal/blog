@@ -9,6 +9,7 @@
     "dist/Chart.js"
   ],
   "devDependencies": {
-    "jquery": "~2.1.4"
+    "jquery": "~2.1.4",
+    "select2": "~4.0"
   }
 }

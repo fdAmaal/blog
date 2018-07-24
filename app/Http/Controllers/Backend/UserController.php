@@ -79,6 +79,8 @@ class UserController extends Controller
         $user->img=$request->img;
         $user->active=$request->active;
         $user->save();
+        return redirect('/admin/users')
+            ->with('success',200);
     }
 
     /**
@@ -91,4 +93,23 @@ class UserController extends Controller
     {
         //
     }
+
+    public function passive($id)
+    {
+        $user=User::find($id);
+        $user->active=0;
+        $user->save();
+        return redirect('/admin/users')
+            ->with('success',200);
+    }
+
+    public function active($id)
+    {
+        $user=User::find($id);
+        $user->active=1;
+        $user->save();
+        return redirect('/admin/users')
+            ->with('success',200);
+    }
+
 }
