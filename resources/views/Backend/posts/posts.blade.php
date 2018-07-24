@@ -8,6 +8,14 @@
 			 <!--------------------------------------------------------------------------->
 			 <!------------- Left side content ------------------------------------------>
 
+     <!--------show message confermation--------------------->
+     @if(session()->has('message'))
+         <div class="alert alert-success">
+             {{ session()->get('message') }}
+         </div>
+     @endif
+
+
      <h4>
       Posts
      </h4>

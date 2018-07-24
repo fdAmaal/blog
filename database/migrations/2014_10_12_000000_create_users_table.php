@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->rememberToken();
-            $table->string('img');
+            $table->string('img')->default('images/posts/HbeoMPRpocGjkZa15YZluvqTigMVneUu6rb6ossf.png');
             $table->string('ip_address');
             $table->boolean('is_admin')->default(0);
             $table->string('country')->default('SA');

@@ -7,7 +7,11 @@ Route::get('/', function () {
 
 //auth
     Auth::routes();
-   // Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', function(){
+    return view('home');
+});
+
+// Route::get('/home', 'HomeController@index')->name('home');
     //Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
     //Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
@@ -27,14 +31,21 @@ Route::get('/login', function(){
 // Admin routes
 Route::prefix('admin')->group(function() {
 
-    Route::get('/', 'Backend\HomeController@index');
-
-    Route::get('/home', function(){
-        return view('HomeController@index');
+    Route::get('/', function(){
+        return view('auth.adminLogin');
     });
+
+    Route::get('/index', function(){
+        return view('Backend.index');
+    });
+
+    Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
     Route::get('notifications', function(){
         return view('Backend.notifications');
+    });
+    Route::get('login', function(){
+        return view('auth.adminLogin');
     });
 
     //categories

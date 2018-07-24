@@ -99,21 +99,13 @@
 
                           <!------Author_firstName----------->
                           <div class="item form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Author_firstName">Author FirstName <span class="required">*</span>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="author_name">Author FirstName <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input type="text" id="Author_firstName" name="Author_firstName" value="{{$post->author_firstName}}" required="required" class="form-control col-md-7 col-xs-12">
+                              <input type="text" id="author_name" name="author_name" value="{{$post->author_firstName}}" required="required" class="form-control col-md-7 col-xs-12">
                             </div>
                           </div>
 
-                          <!------Author_lastName----------->
-                          <div class="item form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Author_lastName">Author LastName <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input type="text" id="Author_lastName" name="Author_lastName" value="{{$post->author_lastName}}" required="required" class="form-control col-md-7 col-xs-12">
-                            </div>
-                          </div>
                           <!------source_url----------->
                           <div class="item form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="source_url">Source URL <span class="required">*</span>

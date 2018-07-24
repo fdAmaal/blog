@@ -46,7 +46,7 @@
                                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="title">Title <span class="required">*</span>
                                                 </label>
                                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                                    <input id="title" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="title" placeholder="post title" required="required" type="text">
+                                                    <input id="title" class="form-control col-md-7 col-xs-12" maxlength="140" data-validate-length-range="6" data-validate-words="2" name="title" placeholder="post title" required="required" type="text">
                                                 </div>
                                             </div>
 
@@ -55,7 +55,7 @@
                                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Description">Description <span class="required">*</span>
                                                 </label>
                                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                                    <textarea id="Description" required="required" name="Description" class="form-control col-md-7 col-xs-12"></textarea>
+                                                    <textarea id="Description" required="required" name="Description" maxlength="140" class="form-control col-md-7 col-xs-12"></textarea>
                                                 </div>
                                             </div>
 
@@ -64,7 +64,7 @@
                                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Content">Content <span class="required">*</span>
                                                 </label>
                                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                                    <textarea id="Content" required="required" name="Content" class="form-control col-md-7 col-xs-12"></textarea>
+                                                    <textarea id="Content" required="required" name="Content" maxlength="5000" class="form-control col-md-7 col-xs-12"></textarea>
                                                 </div>
                                             </div>
 
@@ -120,15 +120,13 @@
                                                 function show1(){
                                                     document.getElementById('hidden').style.display ='none';
                                                     document.getElementById('source_url').value ='http://localhost:8000/admin/posts/create';
-                                                    document.getElementById('Author_firstName').value ='admin';
-                                                    document.getElementById('Author_lastName').value ='admin';
+                                                    document.getElementById('author_name').value ='admin';
 
                                                 }
                                                 function show2(){
                                                     document.getElementById('hidden').style.display = 'block';
                                                     document.getElementById('source_url').value ='';
-                                                    document.getElementById('Author_firstName').value ='';
-                                                    document.getElementById('Author_lastName').value ='';
+                                                    document.getElementById('author_name').value ='';
                                                 }
                                             </script>
 
@@ -143,25 +141,16 @@
                                                     </div>
                                                 </div>
 
-                                                <!-----------Author First Name---------------------------->
+                                                <!-----------Author Name---------------------------->
                                                 <div class="item form-group">
-                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Author_firstName">Author First Name <span class="required">*</span>
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="author_name">Author First Name <span class="required">*</span>
                                                     </label>
                                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                                        <input id="Author_firstName" type="text" name="Author_firstName"  class="optional form-control col-md-7 col-xs-12">
+                                                        <input id="author_name" type="text" name="author_name" maxlength="70" class="optional form-control col-md-7 col-xs-12">
                                                     </div>
                                                 </div>
 
 
-                                                <!-----------Author Last Name---------------------------->
-                                                <div class="item form-group">
-                                                    <label for="authorLname" class="control-label col-md-3">Author Last Name <span class="required">*</span></label>
-                                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                                        <input id="Author_lastName" type="text" name="Author_lastName"  required="required" class="form-control col-md-7 col-xs-12" required="required">
-                                                    </div>
-                                                </div>
-
-                                            </div>
                                             <!-----------active---------------------------->
                                             <div class="item form-group">
 

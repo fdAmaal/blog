@@ -8,6 +8,14 @@
         <!--------------------------------------------------------------------------->
         <!------------- Left side content ------------------------------------------>
 
+        <!--------show message confermation--------------------->
+        @if(session()->has('message'))
+            <div class="alert alert-success">
+                {{ session()->get('message') }}
+            </div>
+        @endif
+
+
         <h4>
             <h4>
                 <a href="{{route('categories.index')}}">Categories</a> >

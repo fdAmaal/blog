@@ -17,8 +17,10 @@ class PostController extends BaseController
      */
     public function index()
     {
-        $posts=Post::join('categories', 'category_id', '=', 'categories.id')
-            ->select('posts.*', 'categories.name')->withCount('comments');
+        $posts=Post::with([ 'category' ])
+            ->withCount(['comments'])
+        ->paginate(9);
+
         return $this->sendResponse($posts->toArray(), 200);
     }
 
@@ -70,7 +72,11 @@ class PostController extends BaseController
      */
     public function show($id)
     {
-        $post = Post::find($id);
+
+        $post=Post::with([ 'category' ])
+            ->withCount(['comments'])
+            ->findOrFail($id);
+
         if (is_null($post)) {
             return $this->sendError('Post not found.');
         }

@@ -53,13 +53,12 @@ class PostsController extends Controller
         $posts->title=$request->title;
         $posts->description=$request->Description;
         $posts->content= $request->Content;
-        $posts->author_firstName=$request->Author_firstName;
-        $posts->author_lastName=$request->Author_lastName;
+        $posts->author_name=$request->author_name;
         $posts->source_url=$request->source_url;
 
         //Upolad image
         $file = $request->file('img');
-        $filePath = $file->store('images', 'public');
+        $filePath = $file->store('images/posts', 'public');
         $posts->img = $filePath;
 
         $posts->active=$request->active;
@@ -134,14 +133,13 @@ class PostsController extends Controller
         $posts->title=$request->Title;
         $posts->description=$request->Description;
         $posts->content= $request-> Content;
-        $posts->author_firstName=$request->Author_firstName;
-        $posts->author_lastName=$request->Author_lastName;
+        $posts->author_name=$request->author_name;
         $posts->source_url=$request->source_url;
 
         //Upolad image
         if (!is_null($request->file('img'))) {
             $file = $request->file('img');
-            $filePath = $file->store('images', 'public');
+            $filePath = $file->store('images/posts', 'public');
             $posts->img = $filePath;
         }
 

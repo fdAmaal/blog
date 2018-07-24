@@ -69,7 +69,7 @@
                   <li><a  href="index"><i class="fa  fa-tachometer"></i> Dashboard </a> </li>
                   <li><a href="{{route('categories.index')}}"><i class="fa  fa-bookmark-o"></i> Categories</a></li>
                   <li><a href="{{route('posts.index')}}"><i class="fa fa-edit"></i> Posts </a></li>
-                  <li><a href="users"><i class="fa  fa-users"></i> Users</a></li>
+                  <li><a href="{{route('users.index')}}"><i class="fa  fa-users"></i> Users</a></li>
 				          <li><a href="notifications"><i class="fa  fa-bullhorn"></i> Notifications</a></li>
                 </ul>
               </div>
@@ -78,8 +78,8 @@
           </div>
         </div>
 
-		
-		
+
+
         <!----------------------- top navigation ---------------------->
         <div class="top_nav">
           <div class="nav_menu">
@@ -87,17 +87,24 @@
 			<div class="nav toggle">
                 <a id="menu_toggle"><i class="fa fa-bars"></i></a>
               </div>
-			  
+
               <ul class="nav navbar-nav navbar-right">
                 <li>
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                     <img src="storage/user.png" alt=""><i class="fa  fa-at"></i> {{ Auth::user()->name }}
-				   </a>
+                  </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="login"> Log Out</a></li>
+                    <li>
+                      <a class="dropdown-item" href="{{ route('logout') }}"
+                         onclick="event.preventDefault();
+                       document.getElementById('logout-form').submit();">
+                        {{ __('Logout') }}
+                      </a>
+                      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        <input type="hidden" name="_token" value="{{csrf_token()}}">
+                      </form>
+                    </li>
                   </ul>
-                </li>
-              </ul>
             </nav>
           </div>
         </div>

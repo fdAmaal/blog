@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
+use Illuminate\Support\Facades\Input;
+
 use App\User;
 
 class RegisterController extends Controller
@@ -54,6 +56,7 @@ class RegisterController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'img' => 'required',
 
         ]);
     }
@@ -66,6 +69,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        if(Input::hasfile($data['img'])){
+            $image = Input::file($data['img']);
+            $upload = base_path().'/fotoprofil/';
+            $filename = $data['nip'].'.jpg';
+            $image->move($upload, $filename);
+            $path = $upload.$filename;
+        }
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],

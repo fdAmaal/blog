@@ -54,7 +54,7 @@ class CategoriesController extends Controller
 
         //Upolad image
         $file = $request->file('img');
-        $filePath = $file->store('images', 'public');
+        $filePath = $file->store('images/categories', 'public');
 
         $category->img = $filePath;
         $category->save();
@@ -111,7 +111,7 @@ class CategoriesController extends Controller
         //Upolad image
         if (!is_null($request->file('img'))) {
             $file = $request->file('img');
-            $filePath = $file->store('images', 'public');
+            $filePath = $file->store('images/categories', 'public');
         }
         $category->img = $filePath;
         $category->active=$request->active;

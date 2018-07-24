@@ -33,12 +33,18 @@
                                         <input type="hidden" name="_token" value="{{csrf_token()}}">
 
 
+
+
+
+
+
+
                                         <!--------Name--------------------->
                                           <div class="item form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                              <input id="name" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="category name" required="required" type="text">
+                                              <input id="name" class="form-control col-md-7 col-xs-12" maxlength="50" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="category name" required="required" type="text">
                                             </div>
                                               <p id="demo"></p>
 
@@ -62,20 +68,6 @@
                                             </div>
                                           </div>
 
-                                        <!---------Validation script------------------------>
-                                        <script>
-                                            function validate() {
-                                                var x, text;
-                                                x = document.getElementById("name").value;
-
-                                                // If x is Not a Number or less than one or greater than 10
-                                                if (x < 1 || x > 50) {
-                                                    text = "category name too long";
-                                                }
-                                                document.getElementById("demo").innerHTML = text;
-                                            }
-                                        </script>
-                                        <!---------/Validation script------------------------>
                                           </form>
 
 

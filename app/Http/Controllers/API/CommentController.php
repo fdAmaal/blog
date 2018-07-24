@@ -69,7 +69,7 @@ class CommentController  extends BaseController
         $post = Post::find($id);
         $comments = $post->comments;
 
-        $likes = Like::where([
+        /*$likes = Like::where([
             ['like', '=', '1'],
             ['comment_id', '=', $comments->id],
         ])->count();
@@ -77,7 +77,7 @@ class CommentController  extends BaseController
         $dislikes = Like::where([
             ['dislike', '=', '1'],
             ['comment_id', '=', $comments->id],
-        ])->count();
+        ])->count();*/
 
         if (is_null($post)) {
             return $this->sendError('Post not found.');
