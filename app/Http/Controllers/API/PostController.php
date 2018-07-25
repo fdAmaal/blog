@@ -18,8 +18,12 @@ class PostController extends BaseController
     public function index()
     {
         $posts=Post::with([ 'category' ])
-            ->withCount(['comments'])
-        ->paginate(9);
+            ->withCount(['comments'=> function ($query) {
+                $query->where('active', 1);
+            }])
+            ->where('active','=',1)
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
 
         return $this->sendResponse($posts->toArray(), 200);
     }
@@ -45,12 +49,12 @@ class PostController extends BaseController
         $input = $request->all();
 
         $validator = Validator::make($input, [
+            'category_id' => 'required',
             'title' => 'required',
+            'img' => 'required',
             'description' => 'required',
             'content' => 'required',
-            'description' => 'required',
-            'img' => 'required',
-            'category_id' => 'required',
+            'author_name' => 'required',
             'source_url' => 'required',
 
         ]);
@@ -73,9 +77,14 @@ class PostController extends BaseController
     public function show($id)
     {
 
+
         $post=Post::with([ 'category' ])
-            ->withCount(['comments'])
+            ->withCount(['comments'=> function ($query) {
+                $query->where('active', 1);
+            }])
+            ->where('active','=',1)
             ->findOrFail($id);
+
 
         if (is_null($post)) {
             return $this->sendError('Post not found.');

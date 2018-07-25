@@ -66,21 +66,12 @@ class CommentController  extends BaseController
      */
     public function show($id)
     {
-        $post = Post::find($id);
-        $comments = $post->comments;
+        $post=Post::find($id);
+        $comments=$post->comments;
 
-        /*$likes = Like::where([
-            ['like', '=', '1'],
-            ['comment_id', '=', $comments->id],
-        ])->count();
 
-        $dislikes = Like::where([
-            ['dislike', '=', '1'],
-            ['comment_id', '=', $comments->id],
-        ])->count();*/
-
-        if (is_null($post)) {
-            return $this->sendError('Post not found.');
+        if (is_null($comments)) {
+            return $this->sendError('category not found.');
         }
 
         return $this->sendResponse( $comments, 200);

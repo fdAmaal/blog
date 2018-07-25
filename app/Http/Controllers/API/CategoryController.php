@@ -65,13 +65,20 @@ class CategoryController extends BaseController
     public function show($id)
     {
 
-        $category = Category::find($id);
-        $posts = $category->posts;
+        $posts=Category::with([ 'posts' ])
+            ->with(['posts'=> function ($query) {
+                $query->withCount(['comments'=> function ($query) {
+                    $query->where('active', 1);
+                }])->where('active', 1);
+            }])
+            ->orderBy('created_at', 'desc')
+            ->findOrFail($id);
+
         if (is_null($posts)) {
-            return $this->sendError('Category not found.');
+            return $this->sendError('category not found.');
         }
 
-        return $this->sendResponse($category->toArray(), 'Category retrieved successfully.');
+        return $this->sendResponse($posts->toArray(), 'Category retrieved successfully.');
     }
 
     /**

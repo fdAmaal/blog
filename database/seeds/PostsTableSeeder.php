@@ -14,7 +14,7 @@ class PostsTableSeeder extends Seeder
     {
         $posts = [
             [
-                "category_id"=>"1",
+                "category_id"=> '1',
                 "title"=>"One morning, when Gregor Samsa woke from troubled dreams.",
                 "img"=>"images/sFEYV773JViiion0Wm1RAJdTWdf1XCFWshkvdKlt.jpeg",
                 "description"=>" hung a picture that he had recently cut out of an illustrated magazine and housed in a nice, gilded frame",
@@ -22,11 +22,9 @@ class PostsTableSeeder extends Seeder
                 "author_name"=>"Drops Luffy",
                 "source_url"=>"images/aGUr0SQcWxsH6t7gyMUJFvG5yEpgpOsOApafUmRi.jpeg",
                 "active"=>"1",
-                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             [
-                "category_id"=>"1",
+                "category_id"=> '1',
                 "title"=>"The quick, brown fox jumps over a lazy dog.",
                 "img"=>"iimages/5hWU2pl4rZJNlcMH7CsJWfVZccHBcDWONFCu7ufP.jpeg",
                 "description"=>"brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps. ",
@@ -34,11 +32,9 @@ class PostsTableSeeder extends Seeder
                 "author_name"=>"Louri Nami",
                 "source_url"=>"images/aGUr0SQcWxsH6t7gyMUJFvG5yEpgpOsOApafUmRi.jpeg",
                 "active"=>"1",
-                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             [
-                "category_id"=>"2",
+                "category_id"=>'2',
                 "title"=>"A wonderful serenity has taken possession of my entire soul",
                 "img"=>"images/sFEYV773JViiion0Wm1RAJdTWdf1XCFWshkvdKlt.jpeg",
                 "description"=>"I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine",
@@ -46,8 +42,6 @@ class PostsTableSeeder extends Seeder
                 "author_name"=>"Louri Nami",
                 "source_url"=>"images/aGUr0SQcWxsH6t7gyMUJFvG5yEpgpOsOApafUmRi.jpeg",
                 "active"=>"1",
-                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             [
                 "category_id"=>"3",
@@ -58,11 +52,9 @@ class PostsTableSeeder extends Seeder
                 "author_name"=>"Louri Nami",
                 "source_url"=>"images/aGUr0SQcWxsH6t7gyMUJFvG5yEpgpOsOApafUmRi.jpeg",
                 "active"=>"1",
-                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             [
-                "category_id"=>"4",
+                "category_id"=>"3",
                 "title"=>"Gregor Samsa woke from troubled dreams.",
                 "img"=>"images/5hWU2pl4rZJNlcMH7CsJWfVZccHBcDWONFCu7ufP.jpeg",
                 "description"=>"I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine",
@@ -70,11 +62,9 @@ class PostsTableSeeder extends Seeder
                 "author_name"=>"Louri Nami",
                 "source_url"=>"images/aGUr0SQcWxsH6t7gyMUJFvG5yEpgpOsOApafUmRi.jpeg",
                 "active"=>"1",
-                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             [
-                "category_id"=>"3",
+                "category_id"=>"2",
                 "title"=>"when Gregor Samsa woke from troubled dreams.",
                 "img"=>"images/5hWU2pl4rZJNlcMH7CsJWfVZccHBcDWONFCu7ufP.jpeg",
                 "description"=>"",
@@ -82,11 +72,9 @@ class PostsTableSeeder extends Seeder
                 "author_name"=>"Louri Nami",
                 "source_url"=>"images/aGUr0SQcWxsH6t7gyMUJFvG5yEpgpOsOApafUmRi.jpeg",
                 "active"=>"1",
-                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             [
-                "category_id"=>"5",
+                "category_id"=>"1",
                 "title"=>"One morning, when Gregor Samsa woke from troubled dreams.",
                 "img"=>"images/5hWU2pl4rZJNlcMH7CsJWfVZccHBcDWONFCu7ufP.jpeg",
                 "description"=>"I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine",
@@ -94,11 +82,9 @@ class PostsTableSeeder extends Seeder
                 "author_name"=>"Zoro onepiece",
                 "source_url"=>"images/aGUr0SQcWxsH6t7gyMUJFvG5yEpgpOsOApafUmRi.jpeg",
                 "active"=>"1",
-                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             [
-                "category_id"=>"3",
+                "category_id"=>"1",
                 "title"=>"The European languages are members of the same family. Their separate existence is a myth.",
                 "img"=>"images/5hWU2pl4rZJNlcMH7CsJWfVZccHBcDWONFCu7ufP.jpeg",
                 "description"=>" wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen. ",
@@ -106,8 +92,6 @@ class PostsTableSeeder extends Seeder
                 "author_name"=>"Marry into",
                 "source_url"=>"images/aGUr0SQcWxsH6t7gyMUJFvG5yEpgpOsOApafUmRi.jpeg",
                 "active"=>"1",
-                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             [
                 "category_id"=>"2",
@@ -118,8 +102,6 @@ class PostsTableSeeder extends Seeder
                 "author_name"=>"Dazai san",
                 "source_url"=>"images/aGUr0SQcWxsH6t7gyMUJFvG5yEpgpOsOApafUmRi.jpeg",
                 "active"=>"1",
-                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             [
                 "category_id"=>"3",
@@ -130,8 +112,6 @@ class PostsTableSeeder extends Seeder
                 "author_name"=>"Louri Nami",
                 "source_url"=>"images/aGUr0SQcWxsH6t7gyMUJFvG5yEpgpOsOApafUmRi.jpeg",
                 "active"=>"1",
-                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],  [
                 "category_id"=>"4",
                 "title"=>"Lor separat existentie es un myth. Por scientie, musica.",
@@ -141,14 +121,12 @@ class PostsTableSeeder extends Seeder
                 "author_name"=>"sada solmen ",
                 "source_url"=>"images/aGUr0SQcWxsH6t7gyMUJFvG5yEpgpOsOApafUmRi.jpeg",
                 "active"=>"1",
-                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
         ];
 
         foreach ($posts as $key => $value) {
 
-            \App\Model\Category::create($value);
+            \App\Model\Post::create($value);
 
         }
     }

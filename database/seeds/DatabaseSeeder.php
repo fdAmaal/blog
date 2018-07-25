@@ -29,6 +29,9 @@ class DatabaseSeeder extends Seeder
         $this->call(CommentsTableSeeder::class);
         $this->command->info('Comments table seeded!');
 
+        $this->call(LikesTableSeeder::class);
+        $this->command->info('Comments table seeded!');
+
         Model::reguard();
     }
 }

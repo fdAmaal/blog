@@ -10,7 +10,8 @@ use App\Model\Post;
 class Comment extends Model
 {
     protected $fillable=['user_id','post_id','comment'];
-    protected $with = ['user','likes'];
+    protected $with = ['user'];
+    protected $appends = ['likes_number','dislikes_number'];
 
     public function user()
     {
@@ -27,14 +28,14 @@ class Comment extends Model
         return $this->hasMany('App\Model\Like', 'comment_id', 'id');
     }
 
-    public function likesNumber()
+    public function getlikesNumberAttribute()
     {
-        return $this->likes()->where('like', '=', 1);
+        return $this->likes()->where('like', '=', 1)->count();
     }
 
-    public function disLikesNumber()
+    public function getdislikesNumberAttribute()
     {
-        return $this->likes()->where('dislike', '=', 1);
+        return $this->likes()->where('dislike', '=', 1)->count();
     }
 
 
