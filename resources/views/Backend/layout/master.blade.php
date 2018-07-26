@@ -51,6 +51,7 @@
             <!----------------------- menu profile quick info ---------------------->
             <div class="profile clearfix">
 
+
               <div class="profile_info" style="text-align: center;">
                 <span >Welcome,</span>
                <h1>{{ Auth::user()->name }}</h1>

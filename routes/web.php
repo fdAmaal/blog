@@ -1,15 +1,21 @@
 <?php
 
+\Illuminate\Support\Facades\Auth::routes();
+
 
 Route::get('/', function () {
     return view('welcome');
 });
 
+
 //auth
     Auth::routes();
-Route::get('/home', function(){
-    return view('home');
-});
+    Route::middleware(['user','auth'])->group(function (){
+        Route::get('/home', function(){
+            return view('home');
+        });
+    });
+
 
 // Route::get('/home', 'HomeController@index')->name('home');
     //Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
@@ -26,27 +32,24 @@ Route::get('/login', function(){
 });
 */
 
-\Illuminate\Support\Facades\Auth::routes();
 
 // Admin routes
-Route::prefix('admin')->group(function() {
+Route::prefix('admin')->middleware('admin')->group(function() {
+
+
 
     Route::get('/', function(){
-        return view('auth.adminLogin');
-    });
-
-    Route::get('/index', function(){
         return view('Backend.index');
     });
 
-    Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+   // Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
     Route::get('notifications', function(){
         return view('Backend.notifications');
     });
-    Route::get('login', function(){
+   /* Route::get('login', function(){
         return view('auth.adminLogin');
-    });
+    });*/
 
     //categories
     Route::resource('categories','Backend\CategoriesController');

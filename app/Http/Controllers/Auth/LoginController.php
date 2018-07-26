@@ -64,17 +64,19 @@ class LoginController extends Controller
         // user surpasses their maximum number of attempts they will get locked out.
         $this->incrementLoginAttempts($request);
         // Customization: If client status is inactive (0) return failed_status error.
+       // $test = \Hash::check($request->password,$client->password);
 
-
-        if ($client->active == 0) {
-            return $this->sendFailedLoginResponse($request, 'Account is inactive');
-        }
+       // dd($test);
 
         if (empty($client)){
             return $this->sendFailedLoginResponse($request);
-        }else{
-            if ($client->is_admin === 0) {
+        }
+        else{
+            if ((bool)$client->is_admin == true) {
                 return $this->sendFailedLoginResponse($request, 'Credentials are invalid');
+            }
+            if ($client->active == 0) {
+                return $this->sendFailedLoginResponse($request, 'Account is inactive');
             }
 
         }
@@ -82,6 +84,14 @@ class LoginController extends Controller
              return $this->sendFailedLoginResponse($request, 'Credentials in invalid');
          }*/
         return $this->sendFailedLoginResponse($request);
+    }
+    //lets overide it
+    protected function authenticated(Request $request, $user)
+    {
+        if ((bool)$user->is_admin == true) {
+            return redirect('/admin');
+        }
+        return redirect('/');
     }
     /**
      * Get the needed authorization credentials from the request.
@@ -93,8 +103,8 @@ class LoginController extends Controller
     {
         $credentials = $request->only($this->username(), 'password');
         // Customization: validate if client status is active (1)
-        $credentials['is_admin'] = 1;
-        $credentials['active'] = 1;
+        //$credentials['is_admin'] = 1;
+        //$credentials['active'] = 1;
         return $credentials;
     }
     /**

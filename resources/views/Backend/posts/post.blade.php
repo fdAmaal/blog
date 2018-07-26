@@ -37,12 +37,6 @@
             <p class="message">
               {{$post->content}}
             </p>
-            >
-
-            <br/>
-            <p class="message"><br/><br/><br/>
-              {{$post->content}}
-            </p>
 
           </div>
         </div>
