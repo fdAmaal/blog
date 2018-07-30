@@ -96,6 +96,7 @@
       <div class="x_panel">
         <div class="x_title">
           <h2>Post Details</h2>
+          <a href="{{route('posts.edit',$post->id)}}"> &nbsp; <i class="fa fa-pencil" aria-hidden="true"></i>  </a>
           <div class="clearfix"></div>
         </div>
         <div class="x_content">
