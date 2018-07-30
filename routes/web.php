@@ -17,21 +17,6 @@ Route::get('/', function () {
     });
 
 
-// Route::get('/home', 'HomeController@index')->name('home');
-    //Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
-    //Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
-
-/*
-//Backend
-Route::get('/', function(){
-    return view('auth.adminLogin');
-});
-
-Route::get('/login', function(){
-    return view('auth.adminLogin');
-});
-*/
-
 
 // Admin routes
 Route::prefix('admin')->middleware('admin')->group(function() {
@@ -46,14 +31,10 @@ Route::prefix('admin')->middleware('admin')->group(function() {
         return view('Backend.index');
     });
 
-   // Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
-
     Route::get('notifications', function(){
         return view('Backend.notifications');
     });
-   /* Route::get('login', function(){
-        return view('auth.adminLogin');
-    });*/
+
 
     //categories
     Route::resource('categories','Backend\CategoriesController');
@@ -67,20 +48,23 @@ Route::prefix('admin')->middleware('admin')->group(function() {
         Route::get('categories/categoryPost/{id}/passive','Backend\CategoryPostsController@passive');
         Route::get('categories/categoryPost/{id}/active','Backend\CategoryPostsController@active');
 
-            //category post comments
-            Route::resource('/comments','Backend\CommentsController');
-            Route::get('categories/categoryPost/comments/{id}/passive','Backend\CommentsController@passive');
-            Route::get('categories/categoryPost/comments/{id}/active','Backend\CommentsController@active');
+        //category post comments
+        Route::resource('/comments','Backend\CommentsController');
+        Route::get('categories/categoryPost/comments/{id}/passive','Backend\CommentsController@passive');
+        Route::get('categories/categoryPost/comments/{id}/active','Backend\CommentsController@active');
+
+
+
 
     //posts
     Route::resource('posts','Backend\PostsController');
     Route::get('posts/{id}/passive','Backend\PostsController@passive');
     Route::get('posts/{id}/active','Backend\PostsController@active');
 
-        //comments
-        Route::resource('/comments','Backend\CommentsController');
-        Route::get('posts/comments/{id}/passive','Backend\CommentsController@passive');
-        Route::get('posts/comments/{id}/active','Backend\CommentsController@active');
+    //comments
+    Route::resource('/comments','Backend\CommentsController');
+    Route::get('posts/comments/{id}/passive','Backend\CommentsController@passive');
+    Route::get('posts/comments/{id}/active','Backend\CommentsController@active');
 
     //users
     Route::resource('users','Backend\UserController');
