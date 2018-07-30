@@ -2,11 +2,41 @@
 @section('title','Categories')
 @section('content')
  <!-- page content -->
+
+
  <div  role="main">
             <div class="clearfix"></div>
+
+
+     @if(session()->has('message.level'))
+         <div class="alert alert-success alert-dismissible">
+             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+             <strong>Success!</strong> {!! session('message.content') !!}
+         </div>
+
+
+     @endif
+
+
+     @if(session()->has('Activated'))
+         <div  class="alert alert-info alert-dismissible">
+             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+             <strong>Warning!</strong>  Category Activated successfully
+         </div>
+
+     @endif
+
+     @if(session()->has('disctivated'))
+         <div class="alert alert-info alert-dismissible">
+             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+             <strong>Warning!</strong>  Category Disctivated successfully
+         </div>
+     @endif
+
      <h4>
          Categories
      </h4>
+
 
 
 

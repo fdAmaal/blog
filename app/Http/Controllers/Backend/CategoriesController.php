@@ -57,6 +57,9 @@ class CategoriesController extends Controller
         $category->img = $filePath;
         $category->active=$request->active;
         $category->save();
+
+        $request->session()->flash('message.level', 'success');
+        $request->session()->flash('message.content', 'Added Category successfully!');
         return redirect('/admin/categories')
             ->with('success',200);
 
@@ -114,6 +117,9 @@ class CategoriesController extends Controller
         $category->img = $filePath;
         $category->active=$request->active;
         $category->save();
+
+        $request->session()->flash('message.level', 'success');
+        $request->session()->flash('message.content', 'Category updated successfully!');
         return redirect('/admin/categories')
             ->with('success',200);
     }
@@ -135,7 +141,7 @@ class CategoriesController extends Controller
         $category=Category::find($id);
         $category->active=0;
         $category->save();
-        return Redirect::back()->with('success', 'Category Activated successfully');
+        return Redirect::back()->with('Activated', 'Category Activated successfully');
     }
 
     public function active($id)
@@ -143,17 +149,11 @@ class CategoriesController extends Controller
         $category=Category::find($id);
         $category->active=1;
         $category->save();
-        return Redirect::back()->with('success', 'Category disactivated successfully');
+        return Redirect::back()->with('disactivated', 'Category disactivated successfully');
     }
 
-    public function post($id)
-    {
-        $post=Post::find($id)
-            ->join('categories', 'category_id', '=', 'categories.id')
-            ->select('posts.*', 'categories.name')->withCount('comments')
-            ->where('posts.id',$id)->get()->first();
-        $comments = $post->comments;
-        //return response()->json($post);
-        return view('Backend.categories.posts',compact('post','comments'));
-    }
+
+
+
+
 }

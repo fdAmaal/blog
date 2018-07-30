@@ -8,6 +8,30 @@
 			 <!--------------------------------------------------------------------------->
 			 <!------------- Left side content ------------------------------------------>
 
+     @if(session()->has('message.level'))
+         <div class="alert alert-success alert-dismissible">
+             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+             <strong>Success!</strong> {!! session('message.content') !!}
+         </div>
+
+
+     @endif
+
+
+     @if(session()->has('Activated'))
+         <div  class="alert alert-info alert-dismissible">
+             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+             <strong>Warning!</strong>  Post Activated successfully
+         </div>
+
+     @endif
+
+     @if(session()->has('disactivated'))
+         <div class="alert alert-info alert-dismissible">
+             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+             <strong>Warning!</strong>  Post Disctivated successfully
+         </div>
+     @endif
 
      <h4>
       Posts
@@ -67,9 +91,9 @@
                                   <span class="sr-only">Toggle Dropdown</span>
                                   </button>
                                   <ul class="dropdown-menu" role="menu">
-                                      <li><a href="/admin/posts/{{$post->id}}/active">Active</a>
+                                      <li><a href="posts/{{$post->id}}/active">Active</a>
                                       </li>
-                                      <li><a href="/admin/posts/{{$post->id}}/passive">Passive</a>
+                                      <li><a href="posts/{{$post->id}}/passive">Passive</a>
                                       </li>
                                   </ul>
                               </div>

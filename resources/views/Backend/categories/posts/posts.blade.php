@@ -8,10 +8,43 @@
         <!--------------------------------------------------------------------------->
         <!------------- Left side content ------------------------------------------>
 
-        <!--------show message confermation--------------------->
-        @if(session()->has('message'))
-            <div class="alert alert-success">
-                {{ session()->get('message') }}
+
+        @if(session()->has('message.level'))
+            <div class="alert alert-success alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Success!</strong> {!! session('message.content') !!}
+            </div>
+
+
+        @endif
+
+
+        @if(session()->has('Activated'))
+            <div  class="alert alert-info alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Warning!</strong>  Post Activated successfully
+            </div>
+
+        @endif
+
+        @if(session()->has('disactivated'))
+            <div class="alert alert-info alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Warning!</strong>  Post Disctivated successfully
+            </div>
+        @endif
+
+        @if(session()->has('commentact'))
+            <div class="alert alert-info alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Warning!</strong>  Comment Activated successfully
+            </div>
+        @endif
+
+        @if(session()->has('commentdis'))
+            <div class="alert alert-info alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Warning!</strong>  Comment Disctivated successfully
             </div>
         @endif
 
@@ -19,7 +52,7 @@
         <h4>
             <h4>
                 <a href="{{route('categories.index')}}">Categories</a> >
-                <a href="{{route('categories.show',$post->category_id)}}">{{$post->name}}</a> >
+                <a href="{{route('categories.show',$post->category_id)}}">{{$post->category->name}}</a> >
                 {{$post->title}}
             </h4>
         </h4>
@@ -67,7 +100,9 @@
             <div class="x_panel">
                 <div class="x_title">
                     <h2>Post Details</h2>
+                    <a href="{{route('categoryPosts.edit',$post->id)}}"> &nbsp; <i class="fa fa-pencil" aria-hidden="true"></i>  </a>
                     <div class="clearfix"></div>
+
                 </div>
                 <div class="x_content">
                     <table class="table table-striped table-bordered">
@@ -77,7 +112,7 @@
                         </tr>
                         <tr>
                             <th>Author Name</th>
-                            <td>{{$post->author_firstName}}</td>
+                            <td>{{$post->author_name}}</td>
                         </tr>
                         <tr>
                             <th>Post Description</th>
@@ -114,9 +149,9 @@
                                     <span class="sr-only">Toggle Dropdown</span>
 
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a href="/admin/posts/{{$post->id}}/active">Active</a>
+                                        <li><a href="{{$post->id}}/active">Active</a>
                                         </li>
-                                        <li><a href="/admin/posts/{{$post->id}}/passive">Passive</a>
+                                        <li><a href="{{$post->id}}/passive">Passive</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -197,9 +232,9 @@
                                         <span class="sr-only">Toggle Dropdown</span>
                                         </button>
                                         <ul class="dropdown-menu" role="menu">
-                                            <li><a href="/admin/comments/{{$comment->id}}/active">Active</a>
+                                            <li><a href="comments/{{$comment->id}}/active">Active</a>
                                             </li>
-                                            <li><a href="/admin/comments/{{$comment->id}}/passive">Passive</a>
+                                            <li><a href="comments/{{$comment->id}}/passive">Passive</a>
                                             </li>
                                         </ul>
                                     </div>

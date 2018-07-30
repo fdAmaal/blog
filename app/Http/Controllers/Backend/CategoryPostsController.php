@@ -3,16 +3,14 @@
 namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
-use DB;
-use Carbon\Carbon;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
+use App\Model\Category;
 use App\Model\Post;
 use App\Model\Comment;
-use App\Model\Category;
-use App\User;
 
-class PostsController extends Controller
+class CategoryPostsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,15 +19,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts=Post::join('categories', 'category_id', '=', 'categories.id')
-            ->select('posts.*', 'categories.name')
-            ->withCount('comments')
-            ->orderBy('created_at','desc')
-            ->paginate(9)
-           ;
-
-        return  view('Backend.posts.posts',compact('posts'));
-        //return response()->json($posts);
+        //
     }
 
     /**
@@ -39,9 +29,12 @@ class PostsController extends Controller
      */
     public function create()
     {
-        // using Eloquent method to insert data
-        $categories=Category::all();
-        return view('Backend.posts.new',compact('categories'));
+
+    }
+
+    public function new($id){
+        $category=Category::find($id);
+        return view('Backend.categories.posts.newpost',compact('category'));
     }
 
     /**
@@ -70,7 +63,7 @@ class PostsController extends Controller
 
         $request->session()->flash('message.level', 'success');
         $request->session()->flash('message.content', 'Post Added successfully!');
-        return redirect('/admin/posts')->with('success',200);
+        return redirect('categories/categoryPost')->with('success',200);
     }
 
     /**
@@ -84,16 +77,14 @@ class PostsController extends Controller
         $post=Post::with([
             'category',
             'comments' =>function($query){
-            $query->withCount(['likes']);
+                $query->withCount(['likes']);
             }
         ])
             ->withCount(['comments'])
             ->findOrFail($id);
 
         //dd($post);
-        return view('Backend.posts.post',compact('post'));
-
-
+        return view('Backend.categories.posts.posts',compact('post'));
     }
 
     /**
@@ -104,14 +95,12 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        // using Eloquent method to edit data
-
         $post=Post::find($id)
             ->join('categories', 'category_id', '=', 'categories.id')
             ->select('posts.*', 'categories.name')
             ->where('posts.id',$id)->get()->first();
         $categories=Category::all();
-        return view('Backend.posts.edit',compact('post','categories'));
+        return view('Backend.categories.posts.edit',compact('post','categories'));
     }
 
     /**
@@ -123,7 +112,6 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // using Eloquent method to edit data
         $posts=Post::find($id);
         $posts->category_id=$request->category;
         $posts->title=$request->Title;
@@ -143,8 +131,7 @@ class PostsController extends Controller
         $posts->save();
         $request->session()->flash('message.level', 'success');
         $request->session()->flash('message.content', 'Post updated successfully!');
-        return redirect('/admin/posts')
-            ->with('success',200);
+        return redirect::back()->with('success',200);
     }
 
     /**
@@ -165,7 +152,7 @@ class PostsController extends Controller
         $posts->save();
 
 
-        return Redirect::back()->with('disactivated', 'disactivated successfully');
+        return Redirect::back()->with('disactivated', 'Post disactivated successfully');
     }
 
     public function active($id)
@@ -176,4 +163,5 @@ class PostsController extends Controller
 
         return Redirect::back()->with('Activated', 'Post Activated successfully');
     }
+
 }

@@ -92,7 +92,7 @@ class CommentsController extends Controller
         $comment=Comment::find($id);
         $comment->active=0;
         $comment->save();
-        return Redirect::back()->with('success', 'Comment Activated successfully');
+        return Redirect::back()->with('commentact', 'Comment Activated successfully');
     }
 
     public function active($id)
@@ -100,7 +100,8 @@ class CommentsController extends Controller
         $comment=Comment::find($id);
         $comment->active=1;
         $comment->save();
-        return Redirect::back()->with('success', 'Comment Activated successfully');
+
+        return Redirect::back()->with('commentdis', 'Comment disactivated successfully');
     }
 
 }

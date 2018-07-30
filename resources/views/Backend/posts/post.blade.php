@@ -8,12 +8,44 @@
     <!--------------------------------------------------------------------------->
     <!------------- Left side content ------------------------------------------>
 
-    @if ( isset($_GET['success']) )
-    {
-    echo "<script type='text/javascript'>
-          alert('تم الحفظ بنجاح');</script>";
 
-    }
+    @if(session()->has('message.level'))
+      <div class="alert alert-success alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Success!</strong> {!! session('message.content') !!}
+      </div>
+
+
+    @endif
+
+
+    @if(session()->has('Activated'))
+      <div  class="alert alert-info alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Warning!</strong>  Post Activated successfully
+      </div>
+
+    @endif
+
+    @if(session()->has('disactivated'))
+      <div class="alert alert-info alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Warning!</strong>  Post Disctivated successfully
+      </div>
+    @endif
+
+    @if(session()->has('commentact'))
+      <div class="alert alert-info alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Warning!</strong>  Comment Activated successfully
+      </div>
+    @endif
+
+    @if(session()->has('commentdis'))
+      <div class="alert alert-info alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Warning!</strong>  Comment Disctivated successfully
+      </div>
     @endif
 
     <h4>

@@ -7,6 +7,33 @@
 
         <!--------------------------------------------------------------------------->
         <!------------- Left side content ------------------------------------------>
+
+        @if(session()->has('message.level'))
+            <div class="alert alert-success alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Success!</strong> {!! session('message.content') !!}
+            </div>
+
+        @endif
+
+
+        @if(session()->has('Activated'))
+            <div  class="alert alert-info alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Warning!</strong>  Post Activated successfully
+            </div>
+
+        @endif
+
+        @if(session()->has('disctivated'))
+            <div class="alert alert-info alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Warning!</strong>  Post Disctivated successfully
+            </div>
+        @endif
+
+
+
         <h4>
             <a href="{{route('categories.index')}}">Categories</a> >
             {{$categories->name}}
@@ -15,7 +42,9 @@
 
         <div class="x_panel">
             <div class="x_title">
-                <h3>{{$categories->name}}</h3>
+                    <a href="categoryPost/{{$categories->id}}/new"><button type="button" class="btn btn-danger btn-lg">New Post</button><a>
+                            <div class="clearfix"></div>
+
                 <div class="clearfix"></div>
             </div>
 
@@ -54,7 +83,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{route('posts.edit',$post->id)}}" class="btn btn-info"> Edit </a>
+                                    <a href="{{route('categoryPosts.edit',$post->id)}}" class="btn btn-info"> Edit </a>
                                     <!---<a href="categories/{{$categories->id}}/{{$post->id}}" class="btn btn-danger"> View </a>--->
                                     <a href="categoryPost/{{$post->id}}" class="btn btn-danger"> View </a>
 

@@ -59,19 +59,28 @@ Route::prefix('admin')->middleware('admin')->group(function() {
     Route::resource('categories','Backend\CategoriesController');
     Route::get('categories/{id}/passive','Backend\CategoriesController@passive');
     Route::get('categories/{id}/active','Backend\CategoriesController@active');
-    Route::get('categories/categoryPost/{id}','Backend\CategoriesController@post');
+
+        //category posts
+        Route::resource('categories/categoryPosts','Backend\CategoryPostsController');
+        Route::get('categories/categoryPost/{id}','Backend\CategoryPostsController@show');
+        Route::get('categories/categoryPost/{id}/new','Backend\CategoryPostsController@new');
+        Route::get('categories/categoryPost/{id}/passive','Backend\CategoryPostsController@passive');
+        Route::get('categories/categoryPost/{id}/active','Backend\CategoryPostsController@active');
+
+            //category post comments
+            Route::resource('/comments','Backend\CommentsController');
+            Route::get('categories/categoryPost/comments/{id}/passive','Backend\CommentsController@passive');
+            Route::get('categories/categoryPost/comments/{id}/active','Backend\CommentsController@active');
 
     //posts
     Route::resource('posts','Backend\PostsController');
     Route::get('posts/{id}/passive','Backend\PostsController@passive');
     Route::get('posts/{id}/active','Backend\PostsController@active');
 
-    //comments
-    Route::resource('/comments','Backend\CommentsController');
-    Route::get('posts/comments/{id}/passive','Backend\CommentsController@passive');
-    Route::get('posts/comments/{id}/active','Backend\CommentsController@active');
-    Route::get('categories/categoryPost/comments/{id}/passive','Backend\CommentsController@passive');
-    Route::get('categories/categoryPost/comments/{id}/active','Backend\CommentsController@active');
+        //comments
+        Route::resource('/comments','Backend\CommentsController');
+        Route::get('posts/comments/{id}/passive','Backend\CommentsController@passive');
+        Route::get('posts/comments/{id}/active','Backend\CommentsController@active');
 
     //users
     Route::resource('users','Backend\UserController');
