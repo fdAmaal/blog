@@ -58,9 +58,9 @@
                                   <span class="sr-only">Toggle Dropdown</span>
                                   </button>
                                   <ul class="dropdown-menu" role="menu">
-                                      <li><a href="/admin/users/{{$user->id}}/active">Active</a>
+                                      <li><a href="users/{{$user->id}}/active">Active</a>
                                       </li>
-                                      <li><a href="/admin/users/{{$user->id}}/passive">Passive</a>
+                                      <li><a href="users/{{$user->id}}/passive">Passive</a>
                                       </li>
                                   </ul>
                               </div>
