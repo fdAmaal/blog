@@ -16,7 +16,7 @@ class UsersTableSeeder extends Seeder
             [
 
                 'name' => 'Hero',
-                'email' => 'hero@blogx.com',
+                'email' => 'hero@blog.com',
                 'password' => Hash::make('password'),
                 'img' => 'images/posts/fw90AuDIuzw4dT5U44y20pU0fDILayHhReer811H.png',
                 'country' => 'Saudi Arabia',
@@ -27,7 +27,7 @@ class UsersTableSeeder extends Seeder
             [
 
                 'name' => 'Admin',
-                'email' => 'admin@blogx.com',
+                'email' => 'admin@blog.com',
                 'password' => Hash::make('password'),
                 'country' => 'Saudi Arabia',
                 'is_admin' => '1',
@@ -38,7 +38,7 @@ class UsersTableSeeder extends Seeder
             [
 
                 'name' => 'Customer',
-                'email' => 'customer@blogx.com',
+                'email' => 'user@blog.com',
                 'country' => 'Saudi Arabia',
                 'password' => Hash::make('password'),
                 'is_admin' => '0',

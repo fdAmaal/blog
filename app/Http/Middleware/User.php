@@ -24,9 +24,3 @@ class User
         return redirect('/admin');
     }
 }
-//i think its ok now
-// Thank you sooo much !!!!!!!!
-//though in future, try use multiple guards for auth,
-//like say admin guard separate from auth guard, i have an article on this, i'll share the link right way.
-// i will, thanks a lot !
-//cheers, i;ll disconnect now

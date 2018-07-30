@@ -22,7 +22,11 @@ class PostsController extends Controller
     public function index()
     {
         $posts=Post::join('categories', 'category_id', '=', 'categories.id')
-            ->select('posts.*', 'categories.name')->withCount('comments')->paginate(9);
+            ->select('posts.*', 'categories.name')
+            ->withCount('comments')
+            ->orderBy('created_at','desc')
+            ->paginate(9)
+           ;
 
         return  view('Backend.posts.posts',compact('posts'));
         //return response()->json($posts);
@@ -63,6 +67,7 @@ class PostsController extends Controller
 
         $posts->active=$request->active;
         $posts->save();
+       // $request->session()->flash('alert-success', 'User was successful added!');
         return redirect('/admin/posts')
             ->with('success',200);
     }

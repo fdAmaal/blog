@@ -20,7 +20,8 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $categories=Category::all();
+        $categories= Category::orderBy('created_at','desc')->get();
+
         return view('Backend.categories.categories',compact('categories'));
     }
 
@@ -44,23 +45,19 @@ class CategoriesController extends Controller
     public function store(Request $request)
     {
 
-        $this->validate($request, [
-            'name'             => 'required|min:3|max:50|unique:categories,name',
-            'img'             => 'required',
-        ]);
-
-        // using Eloquent method to insert data
         $category=new Category;
+        // using Eloquent method to edit data
         $category->name=$request->name;
-
+        $category->active=$request ->active;
         //Upolad image
-        $file = $request->file('img');
-        $filePath = $file->store('images/categories', 'public');
-
+        if (!is_null($request->file('img'))) {
+            $file = $request->file('img');
+            $filePath = $file->store('images/categories', 'public');
+        }
         $category->img = $filePath;
+        $category->active=$request->active;
         $category->save();
-
-        return redirect('admin/categories')
+        return redirect('/admin/categories')
             ->with('success',200);
 
     }

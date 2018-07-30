@@ -8,9 +8,17 @@
     <!--------------------------------------------------------------------------->
     <!------------- Left side content ------------------------------------------>
 
+    @if ( isset($_GET['success']) )
+    {
+    echo "<script type='text/javascript'>
+          alert('تم الحفظ بنجاح');</script>";
+
+    }
+    @endif
+
     <h4>
       <a href="{{route('posts.index')}}">Posts</a> >
-      Post
+      {{$post->title}}
     </h4>
 
 
@@ -59,14 +67,14 @@
           <div class="clearfix"></div>
         </div>
         <div class="x_content">
-          <table class="table table-striped table-bordered">
+          <table class=" col-md-5 col-sm-5 col-xs-12 table table-striped table-bordered">
             <tr>
               <th>Post Title</th>
               <th>{{$post->title}}</th>
             </tr>
             <tr>
               <th>Author Name</th>
-              <td>{{$post->author_firstName}}</td>
+              <td>{{$post->author_name}}</td>
             </tr>
             <tr>
               <th>Post Description</th>
@@ -103,9 +111,9 @@
                   <span class="sr-only">Toggle Dropdown</span>
 
                   <ul class="dropdown-menu" role="menu">
-                    <li><a href="/admin/posts/{{$post->id}}/active">Active</a>
+                    <li><a href="{{$post->id}}/active">Active</a>
                     </li>
-                    <li><a href="/admin/posts/{{$post->id}}/passive">Passive</a>
+                    <li><a href="{{$post->id}}/passive">Passive</a>
                     </li>
                   </ul>
                 </div>
@@ -186,9 +194,9 @@
                     <span class="sr-only">Toggle Dropdown</span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                      <li><a href="/admin/comments/{{$comment->id}}/active">Active</a>
+                      <li><a href="comments/{{$comment->id}}/active">Active</a>
                       </li>
-                      <li><a href="/admin/comments/{{$comment->id}}/passive">Passive</a>
+                      <li><a href="comments/{{$comment->id}}/passive">Passive</a>
                       </li>
                     </ul>
                   </div>

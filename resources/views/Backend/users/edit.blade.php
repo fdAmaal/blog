@@ -65,8 +65,10 @@
                                   <select name="admin" class=form-control col-md-7 col-xs-12">
                                   @if($user->is_admin === 1)
                                       <option  value="1">Admin</option>
+                                      <option  value="0">User</option>
                                   @else
                                       <option  value="0">User</option>
+                                      <option  value="1">Admin</option>
                                       @endif
                                   </select>
                               </div>
@@ -79,8 +81,10 @@
                                   <select name="active" class=form-control col-md-7 col-xs-12">
                                   @if($user->active === 1)
                                       <option  value="1">Active</option>
+                                      <option  value="0">Passive</option>
                                   @else
                                       <option  value="0">Passive</option>
+                                      <option  value="1">Active</option>
                                       @endif
                                   </select>
                               </div>
@@ -89,7 +93,7 @@
                           <div class="ln_solid"></div>
                           <div class="form-group">
                               <div class="col-md-6 col-md-offset-3">
-                                  <a href="/admin/users" type="button" class="btn btn-default">Cancel</a>
+                                  <a href="{{ URL::previous() }}" type="button" class="btn btn-default">Cancel</a>
                                   <button id="send" type="submit" class="btn btn-success">Submit</button>
                               </div>
                           </div>

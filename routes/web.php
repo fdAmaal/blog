@@ -42,6 +42,10 @@ Route::prefix('admin')->middleware('admin')->group(function() {
         return view('Backend.index');
     });
 
+    Route::get('index', function(){
+        return view('Backend.index');
+    });
+
    // Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
     Route::get('notifications', function(){
@@ -53,24 +57,26 @@ Route::prefix('admin')->middleware('admin')->group(function() {
 
     //categories
     Route::resource('categories','Backend\CategoriesController');
-    Route::get('/categories/{id}/passive','Backend\CategoriesController@passive');
-    Route::get('/categories/{id}/active','Backend\CategoriesController@active');
+    Route::get('categories/{id}/passive','Backend\CategoriesController@passive');
+    Route::get('categories/{id}/active','Backend\CategoriesController@active');
     Route::get('categories/categoryPost/{id}','Backend\CategoriesController@post');
 
     //posts
     Route::resource('posts','Backend\PostsController');
-    Route::get('/posts/{id}/passive','Backend\PostsController@passive');
-    Route::get('/posts/{id}/active','Backend\PostsController@active');
+    Route::get('posts/{id}/passive','Backend\PostsController@passive');
+    Route::get('posts/{id}/active','Backend\PostsController@active');
 
     //comments
     Route::resource('/comments','Backend\CommentsController');
-    Route::get('/comments/{id}/passive','Backend\CommentsController@passive');
-    Route::get('/comments/{id}/active','Backend\CommentsController@active');
+    Route::get('posts/comments/{id}/passive','Backend\CommentsController@passive');
+    Route::get('posts/comments/{id}/active','Backend\CommentsController@active');
+    Route::get('categories/categoryPost/comments/{id}/passive','Backend\CommentsController@passive');
+    Route::get('categories/categoryPost/comments/{id}/active','Backend\CommentsController@active');
 
     //users
     Route::resource('users','Backend\UserController');
-    Route::get('/users/{id}/passive','Backend\UserController@passive');
-    Route::get('/users/{id}/active','Backend\UserController@active');
+    Route::get('users/{id}/passive','Backend\UserController@passive');
+    Route::get('users/{id}/active','Backend\UserController@active');
 
 });
 

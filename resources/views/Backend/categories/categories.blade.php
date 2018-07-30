@@ -8,6 +8,9 @@
          Categories
      </h4>
 
+
+
+
 			   <!-------------------- /post ------------------------------------>
         	  
               <div class="x_panel">
@@ -58,9 +61,9 @@
                                   <span class="sr-only">Toggle Dropdown</span>
                                   </button>
                                   <ul class="dropdown-menu" role="menu">
-                                      <li><a href="/admin/categories/{{$category->id}}/active">Active</a>
+                                      <li><a href="categories/{{$category->id}}/active">Active</a>
                                       </li>
-                                      <li><a href="/admin/categories/{{$category->id}}/passive">Passive</a>
+                                      <li><a href="categories/{{$category->id}}/passive">Passive</a>
                                       </li>
                                   </ul>
                               </div>

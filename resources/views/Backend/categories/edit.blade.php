@@ -53,7 +53,7 @@
                                                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="img">
                                                         </label>
                                                         <div class="col-md-6 col-sm-6 col-xs-12">
-                                                            <input type="file" id="img" name="img" required="required" class="form-control col-md-7 col-xs-12">
+                                                            <input type="file" id="img" name="img" accept="image/*" required="required" class="form-control col-md-7 col-xs-12">
 
                                                         </div>
                                                     </div>
@@ -63,7 +63,7 @@
                                                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name <span class="required">*</span>
                                                         </label>
                                                         <div class="col-md-6 col-sm-6 col-xs-12">
-                                                            <input id="name" class="form-control col-md-7 col-xs-12" value="{{$category->name}}" data-validate-words="1" name="name" placeholder="category name" required="required" type="text">
+                                                            <input id="name" class="form-control col-md-7 col-xs-12" value="{{$category->name}}" maxlength="50"  name="name" placeholder="category name" type="text" required >
                                                         </div>
                                                     </div>
 
@@ -74,8 +74,10 @@
                                                             <select name="active" class=form-control col-md-7 col-xs-12">
                                                             @if($category->active === 1)
                                                                 <option  value="1">Active</option>
+                                                                <option  value="0">Passive</option>
                                                             @else
                                                                 <option  value="0">Passive</option>
+                                                                <option  value="1">Active</option>
                                                             @endif
                                                             </select>
                                                         </div>
@@ -84,7 +86,7 @@
                                                     <div class="ln_solid"></div>
                                                     <div class="form-group">
                                                         <div class="col-md-6 col-md-offset-3">
-                                                            <a href="posts"><button  class="btn btn-primary">Cancel</button></a>
+                                                           <form><a href="{{ URL::previous() }}" type="button" class="btn btn-default">Cancel</a></form>
                                                             <button id="send" type="submit" class="btn btn-success">Submit</button>
                                                         </div>
                                                     </div>

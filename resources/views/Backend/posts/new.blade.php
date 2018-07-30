@@ -164,11 +164,15 @@
                                             <div class="ln_solid"></div>
                                             <div class="form-group">
                                                 <div class="col-md-6 col-md-offset-3">
-                                                    <a href="posts"><button class="btn btn-primary">Cancel</button></a>
                                                     <button id="send" type="submit" class="btn btn-success">Submit</button>
                                                 </div>
                                             </div>
                                         </form>
+                                        <div class="form-group">
+                                            <div class="col-md-6 col-md-offset-3">
+                                                <a href="{{ URL::previous() }}"><button class="btn btn-primary">Cancel</button></a>
+                                            </div>
+                                        </div>
                                     </div>
                                     <!------------ End form ------------------------------------->
 

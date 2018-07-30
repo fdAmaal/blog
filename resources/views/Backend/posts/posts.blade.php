@@ -8,20 +8,13 @@
 			 <!--------------------------------------------------------------------------->
 			 <!------------- Left side content ------------------------------------------>
 
-     <!--------show message confermation--------------------->
-     @if(session()->has('message'))
-         <div class="alert alert-success">
-             {{ session()->get('message') }}
-         </div>
-     @endif
-
 
      <h4>
       Posts
      </h4>
 
 			   <!-------------------- /post ------------------------------------>
-        	  
+
               <div class="x_panel">
               <div class="x_title">
               <a href="{{route('posts.create')}}"><button type="button" class="btn btn-danger btn-lg">New Post</button><a>
@@ -36,7 +29,7 @@
                         <tr>
                           <th style="width: 1%">#</th>
                           <th>Post Image</th>
-                          <th >Category</th>   
+                          <th >Category</th>
                           <th>Post Title</th>
                           <th>Comments Count</th>
                           <th>Active</th>
@@ -83,31 +76,31 @@
 
 
 
-                          
-                          
+
+
                           </td>
                         </tr>
                         <!---------/table row---------->
-                       
+
                       @endforeach
 
-                      
-                      
-                      </tbody> 
+
+
+                      </tbody>
                     </table>
 
                     <div class="clearfix"></div>
                     {{$posts->links()}}
-              </div>	  
+              </div>
 		   <!------------- /Right side content ------------------------------------------>
 		   <!-------------------------------------------------------------------------->
 
 			    <div class="clearfix"></div>
-			
+
             </div>
         </div>
 
         <!-- /page content -->
 
- 
+
 @endsection
