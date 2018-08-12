@@ -82,11 +82,8 @@
                           <a href="{{route('posts.show',$post->id)}}" class="btn btn-danger"> View </a>
                               <!-- Split button -->
                               <div class="btn-group">
-                                  @if($post->active === 1)
-                                      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Active</button>
-                                  @else
-                                      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Passive</button>
-                                  @endif
+                                      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Action</button>
+
 
                                   <span class="sr-only">Toggle Dropdown</span>
                                   </button>
@@ -111,10 +108,12 @@
 
 
                       </tbody>
+                       {{$posts->links()}}
                     </table>
 
+
                     <div class="clearfix"></div>
-                    {{$posts->links()}}
+
               </div>
 		   <!------------- /Right side content ------------------------------------------>
 		   <!-------------------------------------------------------------------------->

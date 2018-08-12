@@ -5,10 +5,14 @@ namespace App;
 use Hash;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Passport\HasApiTokens;
+
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use HasApiTokens;
+
 
     public function setPasswordAttribute($password)
     {
@@ -23,7 +27,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','ip_address', 'img'
+        'name', 'email', 'password', 'country', 'img', 'ip_address', 'is_admin', 'active',
     ];
 
     /**
@@ -34,4 +38,11 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
 }

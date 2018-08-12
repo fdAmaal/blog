@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
+namespace App\Http\Controllers\Frontend;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -21,8 +21,8 @@ class CategoriesController extends Controller
     public function index()
     {
         $categories= Category::orderBy('created_at','desc')
-            ->withCount(['posts'])
-            ->paginate(7);
+            ->where('active','=',1)
+            ->paginate(10);
 
         return view('Backend.categories.categories',compact('categories'));
     }
@@ -47,16 +47,10 @@ class CategoriesController extends Controller
     public function store(Request $request)
     {
 
-        $this->validate($request, [
-            'name'             => 'required|min:3|max:50|unique:categories,name',
-            'img'             => 'required|max:2000|mimes:jpeg,bmp,png,jpg,gif',
-        ]);
-
         $category=new Category;
         // using Eloquent method to edit data
         $category->name=$request->name;
         $category->active=$request ->active;
-
         //Upolad image
         if (!is_null($request->file('img'))) {
             $file = $request->file('img');
@@ -73,9 +67,6 @@ class CategoriesController extends Controller
 
     }
 
-
-
-
     /**
      * Display the specified resource.
      *
@@ -84,23 +75,30 @@ class CategoriesController extends Controller
      */
     public function show($id)
     {
-        $categories=Category::with(['posts'=> function ($query) {
+
+        $categories=Post::withCount('comments')
+            ->where('category_id',$id)
+            ->where('active','=',1)
+            ->orderBy('created_at','desc')
+            ->paginate(9);
+
+        /*       $categories=Category::with([ 'posts' ])
+            ->with(['posts'=> function ($query) {
                 $query->withCount(['comments'=> function ($query) {
                     $query->where('active', 1);
                 }])->where('active', 1);
             }])
-            ->where('id', '=',$id)->get();
-
+            ->where('id', '=',$id);
+        */
+        $name=Category::find($id);
+        $category= Category::withCount(['posts'])->get();
 
         if (is_null($categories)) {
             return $this->sendError('category not found.');
         }
-        //return response()->json($categories);
-        return view('Backend.categories.category',compact('categories'));
+
+        return view('Frontend.category.category',compact('categories','category','name'));
     }
-
-
-
 
     /**
      * Show the form for editing the specified resource.
@@ -110,7 +108,6 @@ class CategoriesController extends Controller
      */
     public function edit($id)
     {
-
         // using Eloquent method to edit data
         $category=Category::find($id);
         return view('Backend.categories.edit',compact('category'));
@@ -125,10 +122,6 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'name'    => 'required|min:3|max:50|unique:categories,name,'.$id,
-        ]);
-
         // using Eloquent method to edit data
         $category=Category::find($id);
         $category->name=$request->name;

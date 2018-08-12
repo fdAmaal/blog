@@ -22,6 +22,7 @@ class CreatePostsTable extends Migration
             $table->text('description');
             $table->text('content');
             $table->string('author_name');
+            $table->string('author_img');
             $table->string('source_url');
             $table->boolean('active')->default(1);
             $table->timestamps();

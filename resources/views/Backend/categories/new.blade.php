@@ -14,9 +14,26 @@
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="x_panel">
                             <div class="x_title">
-                                <h2>New Post</h2>
+                                <h2>New Category</h2>
                                 <div class="clearfix"></div>
                             </div>
+
+                            @if ($errors->has('name'))
+                                <div class="alert alert-danger alert-dismissible">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    {{ $errors->first('name') }}
+                                </div>
+
+                            @endif
+
+
+                            @if ($errors->has('img'))
+                                <div class="alert alert-danger alert-dismissible">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    {{ $errors->first('img') }}
+                                </div>
+
+                            @endif
 
                             <div class="x_content">
                                 <br />
@@ -24,7 +41,7 @@
 
                                 <!------------  form ------------------------------------->
                                 <div>
-                                    <form method="post" enctype="multipart/form-data"  action="{{route('categories.store')}}" class="form-horizontal form-label-left">
+                                    <form method="post" enctype="multipart/form-data"  action="{{route('categories.store')}}" class="form-horizontal form-label-left" novalidate>
 
                                         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 
@@ -53,17 +70,13 @@
                                         <div class="ln_solid"></div>
                                         <div class="form-group">
                                             <div class="col-md-6 col-md-offset-3">
+
+                                                <a class="btn btn-primary" href="{{route('categories.index')}}">Cancel</a>
                                                 <button id="send" type="submit" class="btn btn-success">Submit</button>
                                             </div>
                                         </div>
                                     </form>
 
-                                    <div class="form-group">
-                                        <div class="col-md-6 col-md-offset-3">
-                                            <a href="{{ URL::previous() }}"><button class="btn btn-primary">Cancel</button></a>
-                                        </div>
-                                    </div>
-                                </div>
 
                                 <!------------ End form ------------------------------------->
 

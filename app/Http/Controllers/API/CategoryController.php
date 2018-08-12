@@ -17,7 +17,7 @@ class CategoryController extends BaseController
     public function index()
     {
 
-        $categories = Category::all();
+        $categories = Category::where('active', 1)->get();
         return $this->sendResponse($categories->toArray(), 200);
     }
 
@@ -72,7 +72,7 @@ class CategoryController extends BaseController
                 }])->where('active', 1);
             }])
             ->orderBy('created_at', 'desc')
-            ->findOrFail($id);
+            ->where('id',$id)->paginate(9);
 
         if (is_null($posts)) {
             return $this->sendError('category not found.');

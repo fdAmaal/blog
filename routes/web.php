@@ -3,31 +3,34 @@
 \Illuminate\Support\Facades\Auth::routes();
 
 
-Route::get('/', function () {
-    return view('welcome');
+Route::resource('/','Frontend\PostsController');
+Route::resource('home','Frontend\PostsController');
+
+
+//Frontend
+
+Route::middleware(['user','auth'])->group(function (){
+    Route::resource('comments','Frontend\CommentsController');
+    Route::post('comments/{comment_id}/like','Frontend\LikesController@like');
+    Route::post('comments/{comment_id}/dislike','Frontend\LikesController@dislike');
 });
+
+Route::resource('category','Frontend\CategoriesController');
+Route::resource('post','Frontend\PostsController');
+
 
 
 //auth
     Auth::routes();
-    Route::middleware(['user','auth'])->group(function (){
-        Route::get('/home', function(){
-            return view('home');
-        });
-    });
-
-
 
 // Admin routes
 Route::prefix('admin')->middleware('admin')->group(function() {
-
-
 
     Route::get('/', function(){
         return view('Backend.index');
     });
 
-    Route::get('index', function(){
+    Route::get('dashboard', function(){
         return view('Backend.index');
     });
 
@@ -50,11 +53,8 @@ Route::prefix('admin')->middleware('admin')->group(function() {
 
         //category post comments
         Route::resource('/comments','Backend\CommentsController');
-        Route::get('categories/categoryPost/comments/{id}/passive','Backend\CommentsController@passive');
-        Route::get('categories/categoryPost/comments/{id}/active','Backend\CommentsController@active');
-
-
-
+        Route::get('/categories/categoryPost/comments/{id}/passive','Backend\CommentsController@passive');
+        Route::get('/categories/categoryPost/comments/{id}/active','Backend\CommentsController@active');
 
     //posts
     Route::resource('posts','Backend\PostsController');
@@ -62,7 +62,7 @@ Route::prefix('admin')->middleware('admin')->group(function() {
     Route::get('posts/{id}/active','Backend\PostsController@active');
 
     //comments
-    Route::resource('/comments','Backend\CommentsController');
+    Route::resource('comments','Backend\CommentsController');
     Route::get('posts/comments/{id}/passive','Backend\CommentsController@passive');
     Route::get('posts/comments/{id}/active','Backend\CommentsController@active');
 
@@ -72,6 +72,4 @@ Route::prefix('admin')->middleware('admin')->group(function() {
     Route::get('users/{id}/active','Backend\UserController@active');
 
 });
-
-//Frontend
 

@@ -49,11 +49,8 @@
                           <a href="{{route('users.edit',$user->id)}}" class="btn btn-info"> Edit </a>
                               <!-- Split button -->
                               <div class="btn-group">
-                                  @if($user->active === 1)
-                                      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Active</button>
-                                  @else
-                                      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Passive</button>
-                                  @endif
+                                      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Action</button>
+
 
                                   <span class="sr-only">Toggle Dropdown</span>
                                   </button>

@@ -17,6 +17,7 @@
         @endif
 
 
+
         @if(session()->has('Activated'))
             <div  class="alert alert-info alert-dismissible">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -67,7 +68,7 @@
                         <tbody>
                         <!---------table row---------->
 
-                        @foreach($posts as $key=> $post)
+                        @foreach($categories->posts as $key=> $post)
 
                             <tr>
                                 <!--#------> <td>{{$key+1}}</td>
@@ -121,6 +122,7 @@
 
 
                         </tbody>
+
                 </table>
                 <div class="clearfix"></div>
 

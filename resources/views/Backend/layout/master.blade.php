@@ -67,7 +67,7 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a  href="index"><i class="fa  fa-tachometer"></i> Dashboard </a> </li>
+                  <li><a  href="dashboard"><i class="fa  fa-tachometer"></i> Dashboard </a> </li>
                   <li><a href="{{route('categories.index')}}"><i class="fa  fa-bookmark-o"></i> Categories</a></li>
                   <li><a href="{{route('posts.index')}}"><i class="fa fa-edit"></i> Posts </a></li>
                   <li><a href="{{route('users.index')}}"><i class="fa  fa-users"></i> Users</a></li>
@@ -92,7 +92,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li>
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="storage/user.png" alt=""><i class="fa  fa-at"></i> {{ Auth::user()->name }}
+                    <img src="storage/user.png" alt=""><i class="fa  fa-user"></i> {{ Auth::user()->name }}
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     <li>

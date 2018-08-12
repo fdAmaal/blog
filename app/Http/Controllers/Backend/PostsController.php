@@ -52,16 +52,33 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
+
+        $this->validate($request, [
+            'category'             => 'required|min:3|max:50|unique:categories,name',
+            'title'             => 'required|max:2000|mimes:jpeg,bmp,png,jpg,gif',
+            'Description'             => 'required|min:60|max:500',
+            'Content'             => 'required|min:120|max:2000',
+            'author_name'             => 'required|max:70',
+            'author_img'             => 'required|max:2000|mimes:jpeg,bmp,png,jpg,gif',
+            'source_url'             => 'required',
+        ]);
+
         $posts= new Post;
         $posts->category_id=$request->category;
         $posts->title=$request->title;
         $posts->description=$request->Description;
         $posts->content= $request->Content;
         $posts->author_name=$request->author_name;
+        $posts->author_name=$request->author_img;
         $posts->source_url=$request->source_url;
 
         //Upolad image
         $file = $request->file('img');
+        $filePath = $file->store('images/posts', 'public');
+        $posts->img = $filePath;
+
+        //Upolad author_image
+        $file = $request->file('author_img');
         $filePath = $file->store('images/posts', 'public');
         $posts->img = $filePath;
 

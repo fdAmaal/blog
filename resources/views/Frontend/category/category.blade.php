@@ -1,6 +1,6 @@
 @extends('Frontend.layout.master')
 
-@section('title','Home')
+@section('title',$name->name)
 @section('content')
     <div class="container">
 
@@ -9,14 +9,14 @@
             <!-- Blog Entries Column -->
             <div class="col-md-8">
 
-                <h1 class="my-4">Latest Posts
-                    <small>Secondary Text</small>
+                <h1 class="my-4">{{$name->name}}
+                    <small>Latest Posts ..</small>
                 </h1>
 
-            @foreach($posts as $key=> $post)
+            @foreach($categories as $key=> $post)
                 <!-- Blog Post -->
                 <div class="card mb-4">
-                    <img class="card-img-top" style="max-height: 400px" src="{{asset('storage/'.$post->img)}}" alt="post image">
+                    <img class="card-img-top" style=" max-height:400px" src="{{asset('storage/'.$post->img)}}" alt="post image">
                     <div class="card-body">
                         <h2 class="card-title">{{$post->title}}</h2>
                         <p class="card-text">{{$post->description}}</p>
@@ -33,7 +33,7 @@
 
                 <!-- Pagination -->
                 <ul class="pagination justify-content-center mb-4">
-                    {{$posts->links()}}
+
                 </ul>
 
             </div>
@@ -59,7 +59,7 @@
                     <h5 class="card-header">Categories</h5>
 
                     <ul class="card-body">
-                        @foreach($categories as $key=> $category)
+                        @foreach($category as $key=> $category)
 
                         <li><a  href="{{route('category.show',$category->id)}}">{{$category->name}} ({{$category->posts_count}})</a></li>
 

@@ -140,11 +140,8 @@
                             <td>
                                 <!-- Split button -->
                                 <div class="btn-group">
-                                    @if($post->active === 1)
-                                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Active</button>
-                                    @else
-                                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Passive</button>
-                                    @endif
+                                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Action</button>
+
 
                                     <span class="sr-only">Toggle Dropdown</span>
 

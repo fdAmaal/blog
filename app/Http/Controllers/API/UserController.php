@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\API\BaseController as BaseController;
+use App\User;
+use Validator;
 
-class UserController extends Controller
+class UserController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +16,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all();
+        return $this->sendResponse($users->toArray(), 200);
     }
 
     /**
@@ -35,7 +38,26 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+
+        $validator = Validator::make($input, [
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'country' => 'required',
+            'img' => 'required',
+            'password' => 'required|min:6|confirmed',
+            'token' => 'required'
+
+        ]);
+
+        if($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $users = Category::create($input);
+
+        return $this->sendResponse($users->toArray(), 'Catgory created successfully.');
+ 
     }
 
     /**
@@ -46,7 +68,13 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user=User::find($id);
+
+    if (is_null($user)) {
+        return $this->sendError('category not found.');
+    }
+
+    return $this->sendResponse($user->toArray(), 'Category retrieved successfully.');
     }
 
     /**
@@ -69,7 +97,32 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+        $users = User::find($id);
+
+
+        $validator = Validator::make($input, [
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'country' => 'required',
+            'img' => 'required',
+            'password' => 'required|min:6|confirmed'
+        ]);
+
+
+        if($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $users->name = $input['name'];
+        $users->img = $input['img'];
+        $users->email = $input['email'];
+        $users->country = $input['country'];
+        $users->password = $input['password'];
+        $users->save();
+
+
+        return $this->sendResponse($users->toArray(), 'Post updated successfully.');
     }
 
     /**

@@ -6,7 +6,9 @@
    <div class="right_col" role="main">
           <div class="">
 
-            <div class="clearfix"></div>
+
+
+              <div class="clearfix"></div>
        
             <div class="row">
 			     
@@ -17,13 +19,64 @@
                     <h2>New Post</h2>
                     <div class="clearfix"></div>
                   </div>
-				  
+                    @if ($errors->has('title'))
+                        <div class="alert alert-danger alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            {{ $errors->first('title') }}
+                        </div>
+
+                    @endif
+
+
+                    @if ($errors->has('Description'))
+                        <div class="alert alert-danger alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            {{ $errors->first('Description') }}
+                        </div>
+                    @endif
+
+                    @if ($errors->has('Content'))
+                        <div class="alert alert-danger alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            {{ $errors->first('Content') }}
+                        </div>
+                    @endif
+
+                    @if ($errors->has('img'))
+                        <div class="alert alert-danger alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            {{ $errors->first('img') }}
+                        </div>
+                    @endif
+
+                    @if ($errors->has('source_url'))
+                        <div class="alert alert-danger alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            {{ $errors->first('source_url') }}
+                        </div>
+                    @endif
+
+                    @if ($errors->has('author_name'))
+                        <div class="alert alert-danger alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            {{ $errors->first('author_name') }}
+                        </div>
+                    @endif
+
+                    @if ($errors->has('author_img'))
+                        <div class="alert alert-danger alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            {{ $errors->first('author_img') }}
+                        </div>
+                    @endif
+
+
                   <div class="x_content">
                     <br />
-					
 
-                                    <!------------  form ------------------------------------->
+                  <!------------  form ------------------------------------->
                                     <div>
+
                                         <form method="post" enctype="multipart/form-data"  action="{{route('posts.store')}}" class="form-horizontal form-label-left">
 
                                             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
@@ -100,7 +153,7 @@
 
                                             <!-----------Source---------------------------->
                                             <div class="item form-group">
-                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Image">Source <span class="required">*</span>
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tab">Source <span class="required">*</span>
                                                 </label>
                                                 <div class=" col-md-6 col-sm-6 col-xs-12">
                                                     <div class="row btn-group  col-md-6 col-sm-6 col-xs-12" data-toggle="buttons">
@@ -121,12 +174,14 @@
                                                     document.getElementById('hidden').style.display ='none';
                                                     document.getElementById('source_url').value ='http://localhost:8000/admin/posts/create';
                                                     document.getElementById('author_name').value ='admin';
+                                                    document.getElementById('author_img').value ='admin';
 
                                                 }
                                                 function show2(){
                                                     document.getElementById('hidden').style.display = 'block';
                                                     document.getElementById('source_url').value ='';
                                                     document.getElementById('author_name').value ='';
+                                                    document.getElementById('author_img').value ='';
                                                 }
                                             </script>
 
@@ -143,15 +198,25 @@
 
                                                 <!-----------Author Name---------------------------->
                                                 <div class="item form-group">
-                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="author_name">Author First Name <span class="required">*</span>
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="author_name">Author Name <span class="required">*</span>
                                                     </label>
                                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                                         <input id="author_name" type="text" name="author_name" maxlength="70" class="optional form-control col-md-7 col-xs-12">
                                                     </div>
                                                 </div>
 
+                                                <!-----------Author Image---------------------------->
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="author_img">Author Image <span class="required">*</span>
+                                                    </label>
+                                                    <div class="btn col-md-6 col-sm-6 col-xs-12">
+                                                        <input type="file" id="author_img"  name="author_img" accept="image/*" >
+                                                    </div>
+                                                </div>
 
-                                            <!-----------active---------------------------->
+
+
+                                                <!-----------active---------------------------->
                                             <div class="item form-group">
 
                                                 <input id="active" type="hidden" name="active" value="1">
@@ -164,16 +229,11 @@
                                             <div class="ln_solid"></div>
                                             <div class="form-group">
                                                 <div class="col-md-6 col-md-offset-3">
+                                                    <a class="btn btn-primary" href="{{ URL::previous() }}">Cancel</a>
                                                     <button id="send" type="submit" class="btn btn-success">Submit</button>
                                                 </div>
                                             </div>
                                         </form>
-                                        <div class="form-group">
-                                            <div class="col-md-6 col-md-offset-3">
-                                                <a href="{{ URL::previous() }}"><button class="btn btn-primary">Cancel</button></a>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <!------------ End form ------------------------------------->
 
 

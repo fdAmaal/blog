@@ -15,6 +15,8 @@ class Post extends Model
     use Taggable;
 
     protected $table = 'posts';
+    protected $with = ['user'];
+
 
     public function comments()
     {
@@ -26,7 +28,6 @@ class Post extends Model
         return $this->belongsTo(Category::class);
     }
 
-    protected $with = ['user'];
 
     public function user()
     {

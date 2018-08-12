@@ -43,7 +43,7 @@
 
                   <!------------  form ------------------------------------->
                                     <div>
-                                        <form method="post" enctype="multipart/form-data"  action="{{route('posts.store')}}" class="form-horizontal form-label-left">
+                                         <form method="post" enctype="multipart/form-data"  action="{{route('categoryPosts.store')}}" class="form-horizontal form-label-left">
 
                                             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                                             <!-----------Category---------------------------->
