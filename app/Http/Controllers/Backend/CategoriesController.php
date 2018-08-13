@@ -84,12 +84,15 @@ class CategoriesController extends Controller
      */
     public function show($id)
     {
-        $categories=Category::with(['posts'=> function ($query) {
-                $query->withCount(['comments'=> function ($query) {
-                    $query->where('active', 1);
-                }])->where('active', 1);
-            }])
-            ->where('id', '=',$id)->get();
+        $categories=Category::with([
+            'posts' =>function($query){
+            $query->withCount(['comments']);
+            }
+        ])
+        ->withCount(['posts'])
+        ->orderBy('created_at','desc')
+        ->findOrFail($id);
+
 
 
         if (is_null($categories)) {
@@ -166,7 +169,7 @@ class CategoriesController extends Controller
         $category=Category::find($id);
         $category->active=0;
         $category->save();
-        return Redirect::back()->with('Activated', 'Category Activated successfully');
+        return Redirect::back()->with('disactivated', 'Category disactivated successfully');
     }
 
     public function active($id)
@@ -174,7 +177,7 @@ class CategoriesController extends Controller
         $category=Category::find($id);
         $category->active=1;
         $category->save();
-        return Redirect::back()->with('disactivated', 'Category disactivated successfully');
+        return Redirect::back()->with('Activated', 'Category Activated successfully');
     }
 
 

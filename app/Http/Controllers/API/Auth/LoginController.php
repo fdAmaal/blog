@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Auth;
 
 use App\Model\Usertoken;
+
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -24,8 +25,7 @@ class LoginController extends Controller
     {
         $this->validate($request, [
             'email' => 'required',
-            'password' => 'required',
-            'token' => 'required'
+            'password' => 'required'
         ]);
 
         $params = [
@@ -42,24 +42,6 @@ class LoginController extends Controller
         $proxy = Request::create('oauth/token', 'POST');
 
         $user = User::where('email',request('email'))->first();
-
-        if($user){
-            $userToken = Usertoken::where('token', '=', request('token'))->first();
-
-            //If token found then update user id, else create token
-            if($userToken){
-                DB::table('usertokens')->where('token', request('token'))->update([
-                    'user_id' => $user->id,
-                ]);
-            }else{
-                $userToken = Usertoken::create([
-                    'token' => request('token'),
-                    'user_id' => $user->id,
-                    'active' => 1,
-                ]);
-            }
-        }
-
 
         return Route::dispatch($proxy);
 

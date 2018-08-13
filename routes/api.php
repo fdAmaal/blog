@@ -25,21 +25,13 @@ Route::post('refresh', 'Api\Auth\LoginController@refresh');
 Route::middleware('auth:api')->group(function () {
     Route::post('logout', 'Api\Auth\LoginController@logout');
 
-    //Route::post('comments', 'Api\CommentsController@postComment');
-    //Route::post('comments/{id}/delete', 'Api\CommentsController@deleteComment');
+  });
 
 
-    //Route::post('articles/comments', 'Api\ArticlesController@postComment');
-    //Route::post('articles/comments/{id}/delete', 'Api\ArticlesController@deleteComment');
-});
-
-
-Route::resource('/posts', 'API\PostController');
 Route::resource('/categories', 'API\CategoryController');
-Route::resource('/register', 'API\RegisterController');
 Route::resource('/comments', 'API\CommentController');
 Route::resource('/likes', 'API\LikeController');
-
+Route::resource('/posts', 'API\PostController');
 Route::resource('notifications', 'API\NotificationsController');
 Route::resource('users', 'API\UserController');
 

@@ -18,7 +18,7 @@ class RegisterController extends Controller
 
     public function __construct()
     {
-        $this->client = Client::find(1);
+        $this->client = Client::first();
     }
 
 
@@ -31,8 +31,7 @@ class RegisterController extends Controller
             'country' => 'required',
             'img' => 'required',
             'ip_address' => 'required',
-            'password' => 'required|min:6|confirmed',
-            'token' => 'required'
+            'password' => 'required|min:6|confirmed'
         ]);
 
         $user = User::create([
@@ -41,14 +40,11 @@ class RegisterController extends Controller
             'country' => request('country'),
             'img' => request('img'),
             'ip_address' => request('ip_address'),
-            'password' => bcrypt(request('password')),
+            'password' =>request('password') ,
             'active' => 1,
             'is_admin' => 0
         ]);
 
-        DB::table('usertokens')->where('token', request('token'))->update([
-            'user_id' => $user->id,
-        ]);
 
         $params = [
             'grant_type' => 'password',

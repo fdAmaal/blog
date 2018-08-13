@@ -39,7 +39,7 @@
                                 <br />
 
 
-                                <!------------  form ------------------------------------->
+                                <!------------  form ------------------------------------>
                                 <div>
                                     <form method="post" enctype="multipart/form-data"  action="{{route('categories.store')}}" class="form-horizontal form-label-left" novalidate>
 

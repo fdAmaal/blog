@@ -26,7 +26,7 @@
 
      @endif
 
-     @if(session()->has('disctivated'))
+     @if(session()->has('disactivated'))
          <div class="alert alert-info alert-dismissible">
              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
              <strong>Warning!</strong>  Category Disctivated successfully

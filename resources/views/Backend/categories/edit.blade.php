@@ -24,6 +24,24 @@
                                 <div class="clearfix"></div>
                             </div>
 
+
+                                      @if ($errors->has('name'))
+                                <div class="alert alert-danger alert-dismissible">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    {{ $errors->first('name') }}
+                                </div>
+
+                            @endif
+
+
+                            @if ($errors->has('img'))
+                                <div class="alert alert-danger alert-dismissible">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    {{ $errors->first('img') }}
+                                </div>
+
+                            @endif
+
                             <div class="x_content">
                                 <br />
 
@@ -86,7 +104,7 @@
                                                     <div class="ln_solid"></div>
                                                     <div class="form-group">
                                                         <div class="col-md-6 col-md-offset-3">
-                                                           <form><a href="{{ URL::previous() }}" type="button" class="btn btn-default">Cancel</a></form>
+                                                            <a href="{{ URL::previous() }}" class="btn btn-default">Cancel</a>
                                                             <button id="send" type="submit" class="btn btn-success">Submit</button>
                                                         </div>
                                                     </div>

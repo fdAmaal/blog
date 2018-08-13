@@ -78,6 +78,7 @@ class CategoryController extends BaseController
             return $this->sendError('category not found.');
         }
 
+       
         return $this->sendResponse($posts->toArray(), 'Category retrieved successfully.');
     }
 

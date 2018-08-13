@@ -55,8 +55,8 @@ class PostsController extends Controller
 
         $this->validate($request, [
             'category'             => 'required|min:3|max:50|unique:categories,name',
-            'title'             => 'required|max:2000|mimes:jpeg,bmp,png,jpg,gif',
-            'Description'             => 'required|min:60|max:500',
+            'title'             => 'required|max:140',
+            'Description'             => 'required|min:20|max:500',
             'Content'             => 'required|min:120|max:2000',
             'author_name'             => 'required|max:70',
             'author_img'             => 'required|max:2000|mimes:jpeg,bmp,png,jpg,gif',

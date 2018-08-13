@@ -26,7 +26,7 @@
 
         @endif
 
-        @if(session()->has('disctivated'))
+        @if(session()->has('disactivated'))
             <div class="alert alert-info alert-dismissible">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                 <strong>Warning!</strong>  Post Disctivated successfully
@@ -90,11 +90,8 @@
 
                                     <!-- Split button -->
                                     <div class="btn-group">
-                                        @if($post->active === 1)
-                                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Active</button>
-                                        @else
-                                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Passive</button>
-                                        @endif
+                                           <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Action</button>
+                                       
 
                                         <span class="sr-only">Toggle Dropdown</span>
                                         </button>
