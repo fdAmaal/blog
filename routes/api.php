@@ -24,6 +24,8 @@ Route::post('refresh', 'Api\Auth\LoginController@refresh');
 
 Route::middleware('auth:api')->group(function () {
     Route::post('logout', 'Api\Auth\LoginController@logout');
+    Route::post('/comments', 'API\CommentController@store');
+    Route::post('/likes', 'API\LikeController@store');
 
   });
 
