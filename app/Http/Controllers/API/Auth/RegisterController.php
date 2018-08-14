@@ -45,7 +45,6 @@ class RegisterController extends Controller
             'is_admin' => 0
         ]);
 
-
         $params = [
             'grant_type' => 'password',
             'client_id' => $this->client->id,

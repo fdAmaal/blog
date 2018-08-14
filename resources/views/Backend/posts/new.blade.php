@@ -1,25 +1,14 @@
 @extends('Backend.layout.master')
-
 @section('title','New Post')
 @section('content')
-   <!-- page content -->
-   <div class="right_col" role="main">
-          <div class="">
+    <!-- page content -->
+    <div  role="main">
+        <div class="clearfix"></div>
 
+        <!--------------------------------------------------------------------------->
+        <!------------- Left side content ------------------------------------------>
 
-
-              <div class="clearfix"></div>
-       
-            <div class="row">
-			     
-			<div class="row">
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>New Post</h2>
-                    <div class="clearfix"></div>
-                  </div>
-                    @if ($errors->has('title'))
+							     @if ($errors->has('title'))
                         <div class="alert alert-danger alert-dismissible">
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                             {{ $errors->first('title') }}
@@ -69,12 +58,26 @@
                             {{ $errors->first('author_img') }}
                         </div>
                     @endif
+                    @if ($errors->has('Source'))
+                        <div class="alert alert-danger alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            {{ $errors->first('Source') }}
+                        </div>
+                    @endif
+        <!-------------------- /post ------------------------------------>
+
+        <div class="x_panel">
+            <div class="x_title">
+              <h4>
+                <a href="{{route('categories.index')}}">Posts</a> >
+                New
+              </h4>
+                <div class="clearfix"></div>
+            </div>
 
 
-                  <div class="x_content">
-                    <br />
-
-                  <!------------  form ------------------------------------->
+            <div class="x_content">
+                	<!------------  form ------------------------------------->
                                     <div>
 
                                         <form method="post" enctype="multipart/form-data"  action="{{route('posts.store')}}" class="form-horizontal form-label-left">
@@ -147,41 +150,41 @@
                                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="img">Post Image <span class="required">*</span>
                                                 </label>
                                                 <div class="btn col-md-6 col-sm-6 col-xs-12">
-                                                    <input type="file" id="img"  name="img" accept="image/*" >
+                                                    <input type="file" id="img"  name="img" required="required" accept="image/*" >
                                                 </div>
                                             </div>
 
                                             <!-----------Source---------------------------->
-                                            <div class="item form-group">
-                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tab">Source <span class="required">*</span>
+                                            <div class="item form-group" onload="show1()">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Source">Source <span class="required">*</span>
                                                 </label>
-                                                <div class=" col-md-6 col-sm-6 col-xs-12">
-                                                    <div class="row btn-group  col-md-6 col-sm-6 col-xs-12" data-toggle="buttons">
-                                                        <label class="btn btn-default" onclick="show1();" >
-                                                            <input type="radio" name="tab" class="btn btn-default"/>In-source
+
+                                                    <div class="row btn-group col-md-6 col-sm-6 col-xs-12" data-toggle="buttons">
+                                                        <label class="btn btn-default" onclick="show1();">
+                                                             <input type="radio" name="Source" id="InSource"> In-Source
                                                         </label>
                                                         <label class="btn btn-default" onclick="show2();">
-                                                            <input type="radio" name="tab" class="btn btn-default" />Out-Source
-
+                                                             <input type="radio" name="Source" id="OutSource"> Out-Source
                                                         </label>
                                                     </div>
-                                                </div>
+                                               
                                             </div>
 
                                             <!-----------Source script---------------------------->
                                             <script>
+
                                                 function show1(){
                                                     document.getElementById('hidden').style.display ='none';
-                                                    document.getElementById('source_url').value ='http://localhost:8000/admin/posts/create';
+                                                    document.getElementById('source_url').value ='https://hubapps.mobi/scripts/blog/public/home/';
                                                     document.getElementById('author_name').value ='admin';
-                                                    document.getElementById('author_img').value ='admin';
+                                                    document.getElementById('author_img').value ='';
+
 
                                                 }
                                                 function show2(){
                                                     document.getElementById('hidden').style.display = 'block';
                                                     document.getElementById('source_url').value ='';
                                                     document.getElementById('author_name').value ='';
-                                                    document.getElementById('author_img').value ='';
                                                 }
                                             </script>
 
@@ -192,7 +195,7 @@
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="source_url">Source URL <span class="required">*</span>
                                                     </label>
                                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                                        <input type="url" id="source_url" name="source_url" required="required" placeholder="www.website.com" class="form-control col-md-7 col-xs-12">
+                                                        <input type="url" id="source_url" name="source_url" required="required" placeholder="www.website.com" value ='https://hubapps.mobi/scripts/blog/public/home/' class="form-control col-md-7 col-xs-12">
                                                     </div>
                                                 </div>
 
@@ -201,16 +204,17 @@
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="author_name">Author Name <span class="required">*</span>
                                                     </label>
                                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                                        <input id="author_name" type="text" name="author_name" maxlength="70" class="optional form-control col-md-7 col-xs-12">
+                                                    <input id="author_name" type="text" name="author_name" value="admin" required="required" maxlength="70" class="optional form-control col-md-7 col-xs-12">
                                                     </div>
                                                 </div>
 
                                                 <!-----------Author Image---------------------------->
                                                 <div class="item form-group">
-                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="author_img">Author Image <span class="required">*</span>
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="author_img">Author Image 
                                                     </label>
                                                     <div class="btn col-md-6 col-sm-6 col-xs-12">
                                                         <input type="file" id="author_img"  name="author_img" accept="image/*" >
+                                                       
                                                     </div>
                                                 </div>
 
@@ -219,7 +223,9 @@
                                                 <!-----------active---------------------------->
                                             <div class="item form-group">
 
-                                                <input id="active" type="hidden" name="active" value="1">
+                                                <input id="active" type="hidden" name="active" value="1"/>
+                                                <input style="visibility:hidden;"  type="text" name="img2" value="{{Auth::user()->img}}"/>
+                                                      
 
                                             </div>
 
@@ -234,24 +240,18 @@
                                                 </div>
                                             </div>
                                         </form>
-                                    <!------------ End form ------------------------------------->
+                                     </div>
+									<!------------ End form ------------------------------------->
 
+                <div class="clearfix"></div>
 
-                  </div>
-                </div>
-              </div>
             </div>
+            <div class="clearfix"></div>
 
-			
-			
-			
-              </div>
-
-          
-
-
-           </div>
         </div>
-        <!-- /page content -->
+    </div>
+
+    <!-- /page content -->
+
 
 @endsection

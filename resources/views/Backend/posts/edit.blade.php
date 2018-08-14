@@ -1,40 +1,89 @@
 @extends('Backend.layout.master')
-
 @section('title','Edit Post')
 @section('content')
-  <!-- page content -->
-
-  <div class="right_col" role="main">
-
+    <!-- page content -->
+    <div  role="main">
+    
     <h4>
-      <a href="{{route('posts.index')}}">Posts</a> >
-      <a href="{{route('posts.show',$post->id)}}">{{$post->title}}</a> > Edit
+      <a href="{{route('posts.index')}}">Posts</a><b> ></b>
+      <a href="{{route('posts.show',$post->id)}}">{{$post->title}}</a> <b> ></b> Edit
     </h4>
-    <div class="">
+        <div class="clearfix"></div>
+
+        <!--------------------------------------------------------------------------->
+        <!------------- Left side content ------------------------------------------>
+
+							     @if ($errors->has('title'))
+                        <div class="alert alert-danger alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            {{ $errors->first('title') }}
+                        </div>
+
+                    @endif
 
 
-      <div class="clearfix"></div>
+                    @if ($errors->has('Description'))
+                        <div class="alert alert-danger alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            {{ $errors->first('Description') }}
+                        </div>
+                    @endif
 
-      <div class="row">
+                    @if ($errors->has('Content'))
+                        <div class="alert alert-danger alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            {{ $errors->first('Content') }}
+                        </div>
+                    @endif
 
-        <div class="row">
-          <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="x_panel">
-              <div class="x_title">
-                <h2>Edit Post</h2>
+                    @if ($errors->has('img'))
+                        <div class="alert alert-danger alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            {{ $errors->first('img') }}
+                        </div>
+                    @endif
+
+                    @if ($errors->has('source_url'))
+                        <div class="alert alert-danger alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            {{ $errors->first('source_url') }}
+                        </div>
+                    @endif
+
+                    @if ($errors->has('author_name'))
+                        <div class="alert alert-danger alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            {{ $errors->first('author_name') }}
+                        </div>
+                    @endif
+
+                    @if ($errors->has('author_img'))
+                        <div class="alert alert-danger alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            {{ $errors->first('author_img') }}
+                        </div>
+                    @endif
+                    @if ($errors->has('Source'))
+                        <div class="alert alert-danger alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            {{ $errors->first('Source') }}
+                        </div>
+                    @endif
+        <!-------------------- /post ------------------------------------>
+
+        <div class="x_panel">
+            <div class="x_title">
+              <h4>
+                <a href="{{route('categories.index')}}">Posts</a> >
+                New
+              </h4>
                 <div class="clearfix"></div>
-              </div>
+            </div>
 
-              <div class="x_content">
-                <br />
 
-                <div>
-
-                  <div class="" role="tabpanel" data-example-id="togglable-tabs">
-                    <div id="myTabContent" class="tab-content">
-                      <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="post-tab">
-
-                        <!---------edit form  -------------------------------------------------------------------------------------------------------------->
+            <div class="x_content">
+                	<!------------  form ------------------------------------->
+                                  <!---------edit form  -------------------------------------------------------------------------------------------------------------->
                         <form class="form-horizontal form-label-left" method="post" enctype="multipart/form-data"  action="{{route('posts.update',$post->id)}}" novalidate>
 
                           <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
@@ -72,10 +121,10 @@
 
                           <!------Title----------->
                           <div class="item form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Title">Title <span class="required">*</span>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="title">Title <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input id="Title" class="form-control col-md-7 col-xs-12" value="{{$post->title}}" data-validate-words="1" name="Title" placeholder="category name" required="required" type="text">
+                              <input id="title" class="form-control col-md-7 col-xs-12" value="{{$post->title}}" data-validate-words="1" name="title" placeholder="category name" required="required" type="text">
                             </div>
                           </div>
 
@@ -96,16 +145,7 @@
                               <textarea id="Content" name="Content" required="required" class="form-control col-md-7 col-xs-12">{{$post->content}}</textarea>
                             </div>
                           </div>
-
-                          <!------Author_firstName----------->
-                          <div class="item form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="author_name">Author FirstName <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input type="text" id="author_name" name="author_name" value="{{$post->author_name}}" required="required" class="form-control col-md-7 col-xs-12">
-                            </div>
-                          </div>
-
+                          
                           <!------source_url----------->
                           <div class="item form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="source_url">Source URL <span class="required">*</span>
@@ -114,6 +154,31 @@
                               <input type="text" id="source_url" name="source_url" value="{{$post->source_url}}" required="required" class="form-control col-md-7 col-xs-12">
                             </div>
                           </div>
+
+                          <!------Author_firstName----------->
+                          <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="author_name">Author Name <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="text" id="author_name" name="author_name" value="{{$post->author_name}}" required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+
+                           <!------Author_image----------->
+                          <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="author_name">Author Image <span class="required">*</span>
+                             
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                             <div class="profile_pic" >
+                                <img style="  width:100%;  max-width:100px;" src="{{asset('storage/'.$post->author_img)}}" alt="author image" class="img-circle profile_img">
+                             <br/><br/> <input type="file" id="author_img" name="author_img">
+                              </div>
+                              
+                            </div>
+                          </div>
+
+
 
                           <!------Active----------->
                           <div class="item form-group">
@@ -142,30 +207,17 @@
                         </form>
 
 
-                      </div>
+									<!------------ End form ------------------------------------->
 
+                <div class="clearfix"></div>
 
-
-                    </div>
-                  </div>
-
-                </div>
-
-              </div>
             </div>
-          </div>
+            <div class="clearfix"></div>
+
         </div>
-
-
-
-
-      </div>
-
-
-
-
     </div>
-  </div>
-  <!-- /page content -->
+
+    <!-- /page content -->
+
 
 @endsection

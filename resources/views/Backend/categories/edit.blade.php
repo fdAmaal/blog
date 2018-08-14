@@ -1,31 +1,14 @@
 @extends('Backend.layout.master')
-
 @section('title','Edit Category')
 @section('content')
     <!-- page content -->
-    <div class="right_col" role="main">
-        <div class="">
+    <div  role="main">
+        <div class="clearfix"></div>
 
-            <div class="clearfix"></div>
+        <!--------------------------------------------------------------------------->
+        <!------------- Left side content ------------------------------------------>
 
-            <h4>
-                <a href="{{route('categories.index')}}">Categories</a> >
-                <a href="{{route('categories.show',$category->id)}}">{{$category->name}}</a> >
-                Edit
-            </h4>
-
-            <div class="row">
-
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="x_panel">
-                            <div class="x_title">
-                                <h2>Edit Category</h2>
-                                <div class="clearfix"></div>
-                            </div>
-
-
-                                      @if ($errors->has('name'))
+							@if ($errors->has('name'))
                                 <div class="alert alert-danger alert-dismissible">
                                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                     {{ $errors->first('name') }}
@@ -41,18 +24,22 @@
                                 </div>
 
                             @endif
+        <!-------------------- /post ------------------------------------>
 
-                            <div class="x_content">
-                                <br />
+        <div class="x_panel">
+            <div class="x_title">
+              <h4>
+                <a href="{{route('categories.index')}}">Categories</a> >
+                <a href="{{route('categories.show',$category->id)}}">{{$category->name}}</a> >
+                Edit
+              </h4>
+                <div class="clearfix"></div>
+            </div>
 
-                                <div>
 
-
-                                    <div class="" role="tabpanel" data-example-id="togglable-tabs">
-                                        <div id="myTabContent" class="tab-content">
-                                            <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="post-tab">
-                                                <!---------edit form  -------------------------------------------------------------------------------------------------------------->
-                                                <form class="form-horizontal form-label-left" method="post" enctype="multipart/form-data"  action="{{route('categories.update',$category->id)}}" novalidate>
+            <div class="x_content">
+                <!-- start project list -->
+                 <form class="form-horizontal form-label-left" method="post" enctype="multipart/form-data"  action="{{route('categories.update',$category->id)}}" novalidate>
 
                                                     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 
@@ -111,30 +98,18 @@
                                                 </form>
 
 
-                                            </div>
-
-
-
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-
+                <div class="clearfix"></div>
 
             </div>
+            <!------------- /Right side content ------------------------------------------>
+            <!-------------------------------------------------------------------------->
 
-
-
+            <div class="clearfix"></div>
 
         </div>
     </div>
+
     <!-- /page content -->
+
 
 @endsection

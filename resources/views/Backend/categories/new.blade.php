@@ -1,24 +1,14 @@
 @extends('Backend.layout.master')
-
 @section('title','New Category')
 @section('content')
     <!-- page content -->
-    <div class="right_col" role="main">
-        <div class="">
+    <div  role="main">
+        <div class="clearfix"></div>
 
-            <div class="clearfix"></div>
+        <!--------------------------------------------------------------------------->
+        <!------------- Left side content ------------------------------------------>
 
-            <div class="row">
-
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="x_panel">
-                            <div class="x_title">
-                                <h2>New Category</h2>
-                                <div class="clearfix"></div>
-                            </div>
-
-                            @if ($errors->has('name'))
+               @if ($errors->has('name'))
                                 <div class="alert alert-danger alert-dismissible">
                                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                     {{ $errors->first('name') }}
@@ -34,14 +24,18 @@
                                 </div>
 
                             @endif
+        <!-------------------- /post ------------------------------------>
 
-                            <div class="x_content">
-                                <br />
+        <div class="x_panel">
+              <div class="x_title">
+                                <h2>New Category</h2>
+                                <div class="clearfix"></div>
+                            </div>
 
 
-                                <!------------  form ------------------------------------>
-                                <div>
-                                    <form method="post" enctype="multipart/form-data"  action="{{route('categories.store')}}" class="form-horizontal form-label-left" novalidate>
+            <div class="x_content">
+                <!-- start project list -->
+                 <form method="post" enctype="multipart/form-data"  action="{{route('categories.store')}}" class="form-horizontal form-label-left" novalidate>
 
                                         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 
@@ -77,25 +71,18 @@
                                         </div>
                                     </form>
 
-
-                                <!------------ End form ------------------------------------->
-
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-
+                <div class="clearfix"></div>
 
             </div>
+            <!------------- /Right side content ------------------------------------------>
+            <!-------------------------------------------------------------------------->
 
-
-
+            <div class="clearfix"></div>
 
         </div>
     </div>
+
     <!-- /page content -->
+
 
 @endsection

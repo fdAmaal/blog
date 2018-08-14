@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use App\Model\Post;
 use App\Model\Comment;
 use App\Model\Category;
+use App\Model\Notification;
 use App\User;
 
 class PostsController extends Controller
@@ -53,14 +54,16 @@ class PostsController extends Controller
     public function store(Request $request)
     {
 
+       // return response()->json($request);
         $this->validate($request, [
-            'category'             => 'required|min:3|max:50|unique:categories,name',
+            'category'          => 'required',
             'title'             => 'required|max:140',
-            'Description'             => 'required|min:20|max:500',
-            'Content'             => 'required|min:120|max:2000',
-            'author_name'             => 'required|max:70',
-            'author_img'             => 'required|max:2000|mimes:jpeg,bmp,png,jpg,gif',
-            'source_url'             => 'required',
+            'Description'       => 'required|min:20|max:500',
+            'Content'           => 'required|min:120|max:2000',
+            'author_name'       => 'required|max:70',
+            'img'               => 'required|max:2000|mimes:jpeg,bmp,png,jpg,gif',
+            'source_url'        => 'required',
+            'Source'               => 'required',
         ]);
 
         $posts= new Post;
@@ -69,16 +72,20 @@ class PostsController extends Controller
         $posts->description=$request->Description;
         $posts->content= $request->Content;
         $posts->author_name=$request->author_name;
-        $posts->author_name=$request->author_img;
         $posts->source_url=$request->source_url;
+
+         //Upolad image
+         if (!is_null($request->file('author_img'))) {
+            $file = $request->file('author_img');
+            $filePath = $file->store('images/posts/author', 'public');
+            $posts->author_img = $filePath;
+        }
+        else{
+            $posts->author_img = $request->img2;
+        } 
 
         //Upolad image
         $file = $request->file('img');
-        $filePath = $file->store('images/posts', 'public');
-        $posts->img = $filePath;
-
-        //Upolad author_image
-        $file = $request->file('author_img');
         $filePath = $file->store('images/posts', 'public');
         $posts->img = $filePath;
 
@@ -140,10 +147,19 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'category'          => 'required',
+            'title'             => 'required|max:140',
+            'Description'       => 'required|min:20|max:500',
+            'Content'           => 'required|min:120|max:2000',
+            'author_name'       => 'required|max:70',
+            'source_url'        => 'required',
+        ]);
+
         // using Eloquent method to edit data
         $posts=Post::find($id);
         $posts->category_id=$request->category;
-        $posts->title=$request->Title;
+        $posts->title=$request->title;
         $posts->description=$request->Description;
         $posts->content= $request-> Content;
         $posts->author_name=$request->author_name;
@@ -156,8 +172,16 @@ class PostsController extends Controller
             $posts->img = $filePath;
         }
 
+           //Upolad image
+           if (!is_null($request->file('author_img'))) {
+            $file = $request->file('author_img');
+            $filePath = $file->store('images/posts/author', 'public');
+            $posts->author_img = $filePath;
+        }
+
         $posts->active=$request->active;
         $posts->save();
+
         $request->session()->flash('message.level', 'success');
         $request->session()->flash('message.content', 'Post updated successfully!');
         return redirect('/admin/posts')

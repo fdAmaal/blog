@@ -57,6 +57,7 @@ class RegisterController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
             'img' => 'required',
+            'country' => 'required',
 
         ]);
     }
@@ -82,7 +83,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => $data['password'],
             'ip_address' => request()->ip(),
-            'country' => null
+            'country' => $data['country'],
         ]);
     }
     //or alternatively retain this hash imput and remove the setAtrributes function in user model

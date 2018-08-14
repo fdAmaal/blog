@@ -62,6 +62,20 @@
                                 </div>
                             </div>
 
+                                 <div class="form-group row">
+                                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('country') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="country" type="text" class="form-control{{ $errors->has('country') ? ' is-invalid' : '' }}" name="country" required>
+
+                                    @if ($errors->has('country'))
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('country') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
                             <div class="form-group row">
                                 <label for="img" class="col-md-4 col-form-label text-md-right">Image</label>
 
