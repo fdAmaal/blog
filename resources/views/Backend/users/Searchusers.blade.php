@@ -10,27 +10,19 @@
                 <h3>Users</h3>
               </div>
 
-             <!-------------------- search ------------------------------------>
-              <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                    <form action="users/search" method="POST" role="search">
-                    <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-
-                    <div class="input-group">
-                        <input type="text" class="form-control" name="search" placeholder="Search for user...">
-                        <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">Go!</button>
-                        </span>
-                    </div>
-
-                    </form>
-                </div>
-              </div>
-             <!-------------------- /search ------------------------------------>
         </div>
 
               <div class="x_panel">
+              <div class="x_title">
+              <h3>Search results
+                    <div class="clearfix"></div>
+                  </div>
+
                   <div class="x_content">
+                  @if(isset($details))              
+                   <p> The Search results for your query <b> {{ $query }} </b> are :</p>
+               
+
                    <!-- start project list -->
                    <table class="table table-striped projects">
                       <thead>
@@ -47,7 +39,7 @@
                       </thead>
                       <tbody>
                       <!---------table row---------->
-                      @foreach($users as $key=> $user)
+                      @foreach($details as $key=> $user)
                       
                         <tr>
                           <!--#------> <td>{{$key+1}}</td>
@@ -83,10 +75,13 @@
                           
                           
                           </td>
-                        </tr>
-                        <!---------/table row---------->
-                       
-                      @endforeach
+                          @endforeach
+                    
+                    <!---------/table row---------->
+
+                        @else 
+                           <p><b>No results</b></p>  
+                          @endif
                       
                       
                       </tbody> 

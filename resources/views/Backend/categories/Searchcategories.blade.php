@@ -33,28 +33,18 @@
          </div>
      @endif
 
+    @if(session()->has('details'))
+         <div class="alert alert-success alert-dismissible">
+             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+             <strong>Success!</strong> {!! session('details') !!}
+         </div>
+     @endif
+
+
         <div class="page-title">
               <div class="title_left">
                 <h3>Categories</h3>
               </div>
-
-             <!-------------------- search ------------------------------------>
-              <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                    <form action="categories/search" method="POST" role="search">
-                    <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-
-                    <div class="input-group">
-                        <input type="text" class="form-control" name="searchCategory" placeholder="Search for category...">
-                        <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">Go!</button>
-                        </span>
-                    </div>
-
-                    </form>
-                </div>
-              </div>
-
         </div>
 
 
@@ -67,18 +57,21 @@
         	  
               <div class="x_panel">
               <div class="x_title">
-              <a href="{{route('categories.create')}}"><button type="button" class="btn btn-danger btn-lg">New Category</button><a>
+              <h3>Search results
                     <div class="clearfix"></div>
-                
-            
-
                   </div>
 
 
                 <div class="x_content">
                    <!-- start project list -->
                    <table class="table table-striped projects">
-                      <thead>
+                   
+                      <!---------table row---------->
+                      @if(isset($details))
+
+                      
+                          <p> The Search results for your query <b> {{ $query }} </b> are :</p>
+                          <thead>
                         <tr>
                           <th style="width: 1%">#</th>
                           <th>Image</th>
@@ -88,9 +81,8 @@
                         </tr>
                       </thead>
                       <tbody>
-                      <!---------table row---------->
-                
-                      @foreach($categories as $key=> $category)
+
+                      @foreach($details as $key=> $category)
                       
                         <tr>
                           <!--#------> <td>{{$key+1}}</td>
@@ -124,14 +116,23 @@
 
                           </td>
                         </tr>
+                       
                         @endforeach
                         <!---------/table row---------->
                        
+                           <!---------table row---------->
+                      @else
+                     
+                      <p><b>No results</b></p>
+
                        
+                        @endif
+                        <!---------/table row---------->
+
                      
                       
                       </tbody>
-                       {{$categories->links()}}
+                     
                     </table>
                     <div class="clearfix"></div>
               </div>	  
