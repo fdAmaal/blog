@@ -18,8 +18,8 @@ Route::any('home/search',function(){
                         ->paginate(9);
     $categories = Category::where('active', 1)->get();
     if(count($posts) > 0)
-        return view('search')->withDetails($posts)->withQuery ( $search );
-    else return view ('search')->withMessage('No Details found. Try to search again !');
+        return view('Frontend.search')->withDetails($posts)->withQuery ( $search );
+    else return view ('Frontend.search')->withMessage('No Details found. Try to search again !');
 });
 
 
