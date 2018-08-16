@@ -42,12 +42,7 @@
         <!-------------------- /post ------------------------------------>
 
         <div class="x_panel">
-            <div class="x_title">
-                    <a href="categoryPost/{{$categories->id}}/new"><button type="button" class="btn btn-danger btn-lg">New Post</button><a>
-                            <div class="clearfix"></div>
-
-                <div class="clearfix"></div>
-            </div>
+      
 
 
             <div class="x_content">

@@ -30,7 +30,6 @@ class RegisterController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'country' => 'required',
-            'img' => 'required',
             'ip_address' => 'required',
             'password' => 'required|min:6|confirmed'
         ]);
@@ -44,17 +43,6 @@ class RegisterController extends Controller
             'active' => 1,
             'is_admin' => 0
         ]);
-
-        if($request->img){
-
-            $png_url = "user-".time().".png";
-            $path = public_path()."/uploads/backend/users/".$png_url;
-            $base=base64_decode($request->img);
-            Image::make($base)->save($path);
-            $user->img = $png_url;
-            $user->save();
- 
-        }
 
 
         $params = [

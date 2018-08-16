@@ -37,10 +37,10 @@
 
                 <p>  {{$post->content}}</p>
 
-                <span style="background-color: #2c9e5d; color:white" class="badge bg-green">0</span>
+                <!---<span style="background-color: #2c9e5d; color:white" class="badge bg-green">0</span>
                     <span style="background-color: #2c4c9e; color:white" class="badge bg-green"><i class="fa  fa-thumbs-o-up"></i>0</span>
                     <span style="background-color: #9e2c4c; color:white" class="badge bg-green"><i class="fa  fa-thumbs-o-down"></i>0</span>
-
+                --->
                 <hr>
 
                 @guest
@@ -91,8 +91,32 @@
                                         <h5 class="mt-0"></h5>
                                         &nbsp;&nbsp;&nbsp;&nbsp; {{$comment->comment}} <br/><br/>
 
-                                         <span><a href="comments/{{$comment->id}}/like"><i style="color:#2387ce" class="fa fa-thumbs-up"></i> </a> {{$comment->likes->pluck('like')->sum()}}</span>&nbsp;
-                                         <span><a href="comments/{{$comment->id}}/dislike"><i style="color:#707070" class="fa fa-thumbs-down"></i></a> {{$comment->likes->pluck('dislike')->sum()}}</span>
+                                    <div class="row">
+                                         <span>
+                                         <form action="comments/{{$comment->id}}/like" method="post">
+                                        <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+
+                                         <input type="hidden" name="post_id" value="{{$post->id}}"/>
+                                         <input type="hidden" name="comment_id" value="{{$comment->id}}"/>
+                                         <input type="hidden" name="user_id" value=" {{ Auth::user()->id }}"/>
+                                    
+                                         <a style="background-color:none;">
+                                           <i style="color:#2387ce" class="fa fa-thumbs-up"></i> {{$comment->likes->pluck('like')->sum()}}
+                                           </a>
+                                        </form></span>&nbsp;&nbsp;
+
+                                         <span>
+                                         <form action="comments/{{$comment->id}}/dislike" method="post">
+                                        <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+
+                                            <input type="hidden" name="comment_id" value="{{$comment->id}}"/>
+                                            <input type="hidden" name="post_id" value="{{$post->id}}"/>
+                                            <input type="hidden" name="user_id" value=" {{ Auth::user()->id }}"/>
+                                            <a  style="background-color:none;">
+                                            <i style="color:#707070" class="fa fa-thumbs-down"></i></a> {{$comment->likes->pluck('dislike')->sum()}}
+                                          </a>
+                                            </form></span>
+                                    </div>
                                     </div>
                                 </div><hr/>
                             @endforeach

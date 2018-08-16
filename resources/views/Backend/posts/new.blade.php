@@ -64,6 +64,29 @@
                             {{ $errors->first('Source') }}
                         </div>
                     @endif
+
+                     @if ($errors->has('tag'))
+                        <div class="alert alert-danger alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            {{ $errors->first('tag') }}
+                        </div>
+                    @endif
+
+                        @if(session()->has('success'))
+         <div class="alert alert-success alert-dismissible">
+             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+             <strong>Success!</strong>Tag added successfully
+         </div>
+
+
+     @endif
+
+     <script>
+            $('.selectpicker').selectpicker({
+            style: 'btn-info',
+            size: 4
+            });
+     </script>
         <!-------------------- /post ------------------------------------>
 
         <div class="x_panel">
@@ -121,6 +144,20 @@
                                                 </label>
                                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                                     <textarea id="Content" required="required" name="Content" maxlength="5000" class="form-control col-md-7 col-xs-12"></textarea>
+                                                </div>
+                                            </div>
+
+                                            <!-----------Tag---------------------------->
+                                            <div class="item form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="category"> Tags <span class="required">*</span></label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <select name="tags" multiple="multiple" class=form-control col-md-7 col-xs-12 selectpicker">
+                                                    @foreach($tags as $key=> $tag)
+
+                                                        <option  value="{{$tag->id}}"> {{$tag->name}}</option>
+                                                        @endforeach
+
+                                                        </select>
                                                 </div>
                                             </div>
 
@@ -249,6 +286,56 @@
             <div class="clearfix"></div>
 
         </div>
+
+
+        <!---------tags---------------->
+        
+        <div class="x_panel">
+            <div class="x_title">
+              <h4>
+                New Tag
+              </h4>
+                <div class="clearfix"></div>
+            </div>
+
+
+            <div class="x_content">
+                	<!------------  form ------------------------------------->
+                                    <div>
+
+                                        <form method="post" enctype="multipart/form-data"  action="{{route('tags.store')}}" class="form-horizontal form-label-left">
+
+                                            <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+                                            <!-----------Category---------------------------->
+                                            <div class="item form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="tag">New Tag <span class="required">*</span></label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <input name="tag" class=form-control col-md-7 col-xs-12">
+                                         
+                                                </div>
+                                            </div>
+
+
+                                            <!-----------Buttons---------------------------->
+                                            <div class="ln_solid"></div>
+                                            <div class="form-group">
+                                                <div class="col-md-6 col-md-offset-3">
+                                                    <a class="btn btn-primary" href="{{ URL::previous() }}">Cancel</a>
+                                                    <button id="send" type="submit" class="btn btn-success">Submit</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                     </div>
+									<!------------ End form ------------------------------------->
+
+                <div class="clearfix"></div>
+
+            </div>
+            <div class="clearfix"></div>
+
+        </div>
+
+
     </div>
 
     <!-- /page content -->

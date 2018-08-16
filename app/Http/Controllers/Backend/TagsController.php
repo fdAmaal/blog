@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
+use App\Model\Tag;
 
 class TagsController extends Controller
 {
@@ -36,11 +37,15 @@ class TagsController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, array('name'=>'requires|max:255'));
+        $this->validate($request, [
+            'tag'             => 'required|max:140',
+        ]);
         $tag=new Tag;
-        $tag->name =$request->name;
+        $tag->name =$request->tag;
         $tag->save();
         Session::flash('success', 200);
+        
+        return redirect()->route('posts.create')->with('success',200);
     }
 
     /**

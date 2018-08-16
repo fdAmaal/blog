@@ -45,7 +45,7 @@
                     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 
                     <div class="input-group">
-                        <input type="text" class="form-control" name="searchCategory" placeholder="Search for category...">
+                        <input type="text" class="form-control" name="search" placeholder="Search for category...">
                         <span class="input-group-btn">
                         <button class="btn btn-default" type="button">Go!</button>
                         </span>

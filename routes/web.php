@@ -1,5 +1,6 @@
 <?php
 use App\Model\Category;
+use App\Model\Tag;
 use App\Model\Post;
 use App\User;
 use Illuminate\Support\Facades\Input;
@@ -27,8 +28,8 @@ Route::any('home/search',function(){
 
 Route::middleware(['user','auth'])->group(function (){
     Route::resource('comment','Frontend\CommentsController');
-    Route::post('comments/{comment_id}/like','Frontend\LikesController@like');
-    Route::post('comments/{comment_id}/dislike','Frontend\LikesController@dislike');
+    Route::post('post/comments/{comment_id}/like','Frontend\LikesController@like');
+    Route::post('post/comments/{comment_id}/dislike','Frontend\LikesController@dislike');
 });
 
 Route::resource('category','Frontend\CategoriesController');
@@ -62,14 +63,11 @@ Route::prefix('admin')->middleware('admin')->group(function() {
     Route::get('categories/{id}/active','Backend\CategoriesController@active');   
     Route::any('categories/search',function(){
         $searchPost = Input::get ( 'search' );
-        $posts = Post::where('title','LIKE','%'.$searchPost.'%')
-                            ->orWhere ( 'description', 'LIKE', '%' . $searchPost . '%' )
-                            ->orWhere ( 'content', 'LIKE', '%' . $searchPost . '%' )
-                            ->orWhere ( 'author_name', 'LIKE', '%' . $searchPost . '%' )
+        $posts = Category::where('name','LIKE','%'.$searchPost.'%')
                             ->paginate(9);
         if(count($posts) > 0)
-            return view('Backend.posts.Searchposts')->withDetails($posts)->withQuery ( $searchPost );
-        else return view ('Backend.posts.Searchposts')->withMessage('No Details found. Try to search again !');
+            return view('Backend.categories.Searchcategories')->withDetails($posts)->withQuery ( $searchPost );
+        else return view ('Backend.categories.Searchcategories')->withMessage('No Details found. Try to search again !');
     });
 
 
@@ -87,6 +85,7 @@ Route::prefix('admin')->middleware('admin')->group(function() {
 
     //posts
     Route::resource('posts','Backend\PostsController');
+    Route::resource('tags','Backend\TagsController');
     Route::get('posts/{id}/passive','Backend\PostsController@passive');
     Route::get('posts/{id}/active','Backend\PostsController@active');
     Route::any('posts/search',function(){

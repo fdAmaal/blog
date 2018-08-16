@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use App\Model\Post;
 use App\Model\Comment;
 use App\Model\Category;
+use App\Model\Tag;
 use App\Model\Notification;
 use App\User;
 
@@ -42,7 +43,8 @@ class PostsController extends Controller
     {
         // using Eloquent method to insert data
         $categories=Category::all();
-        return view('Backend.posts.new',compact('categories'));
+        $tags=Tag::all();
+        return view('Backend.posts.new',compact('categories','tags'));
     }
 
     /**
