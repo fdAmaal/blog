@@ -7,7 +7,7 @@
         <div class="row">
 
             <!-- Blog Entries Column -->
-            <div class="col-md-8">
+            <div class="col-md-12">
 
                   @if(isset($details))              
                    <h1 class="my-4">Search Result
@@ -25,7 +25,7 @@
                     </div>
                     <div class="card-footer text-muted">
                         Posted on {{$post->created_at}} by
-                        <a href="#">{{$post->author_name}}</a>
+                        <b>{{$post->author_name}}</b>
                     </div>
                 </div>
             @endforeach

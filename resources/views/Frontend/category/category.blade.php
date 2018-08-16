@@ -24,7 +24,8 @@
                     </div>
                     <div class="card-footer text-muted">
                         Posted on {{$post->created_at}} by
-                        <a href="#">{{$post->author_name}}</a>
+                        <b>{{$post->author_name}}</b> <span style="float:right; font-size:16px; background-color: #2c9e5d; color:white" class="badge bg-green">{{$name->name}}</span>
+                   
                     </div>
                 </div>
             @endforeach

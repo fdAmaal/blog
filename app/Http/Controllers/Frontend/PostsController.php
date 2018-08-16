@@ -23,10 +23,12 @@ class PostsController extends Controller
         $posts=Post::join('categories', 'category_id', '=', 'categories.id')
             ->select('posts.*', 'categories.name')
             ->withCount('comments')
+            ->where('posts.active','=',1)
+            ->where('categories.active','=',1)
             ->orderBy('created_at','desc')
             ->paginate(9)
            ;
-        $categories = Category::withCount(['posts'])->get();
+        $categories = Category::withCount(['posts'])->where('active','=',1)->get();
 
 
         return  view('home',compact('posts','categories'));
@@ -66,13 +68,14 @@ class PostsController extends Controller
             'category',
             'comments' =>function($query){
             $query->withCount(['likes']);
+            $query ->orderBy('created_at','desc');
             }
         ])
             ->withCount(['comments'])
             ->findOrFail($id);
 
         //return response()->json($post);
-        $categories = Category::withCount(['posts'])->get();
+        $categories = Category::withCount(['posts'])->where('active','=',1)->get();
 
         return view('Frontend.post.posts',compact('post', 'categories'));
 

@@ -16,14 +16,15 @@
                 <!-- Author -->
                 <p class="lead">
                     by
-                    <a href="#">{{$post->author_name}}</a>
+                    <b>{{$post->author_name}}</b>
                 </p>
 
                 <hr>
 
                 <!-- Date/Time -->
-                <p>Posted on {{$post->created_at}}</p>
-
+                <p>Posted on {{$post->created_at}}  <span style="float:right; font-size:16px; background-color: #2c9e5d; color:white" class="badge bg-green">{{$post->category->name}}</span>
+              </p>
+                    
                 <hr>
 
                 <!-- Preview Image -->
@@ -51,7 +52,7 @@
                         <div class="card my-4">
                             <h5 class="card-header">Leave a Comment:</h5>
                             <div class="card-body">
-                                <form action="{{route('comments.store')}}" method="post">
+                                <form action="{{route('comment.store')}}" method="post">
                                     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 
                                     <div class="form-group">
@@ -86,7 +87,7 @@
                                 <div class="media mb-4">
                                     <img class="d-flex mr-3 rounded-circle" style="border-style: solid; border-color: #e2e2e2; max-height: 60px; max-width: 60px" src="{{asset('storage/'.$comment->user->img)}} " alt="">
                                     <div class="media-body">
-                                        <h5 class="mt-0">{{$comment->user->name}} </h5>
+                                        <h5 class="mt-0">{{$comment->user->name}} <span><small>{{$comment->created_at}}</small></span> </h5>
                                         <h5 class="mt-0"></h5>
                                         &nbsp;&nbsp;&nbsp;&nbsp; {{$comment->comment}} <br/><br/>
 
@@ -107,16 +108,20 @@
             <!-- Sidebar Widgets Column -->
             <div class="col-md-4">
 
-                <!-- Search Widget -->
-                <div class="card my-4">
+               <!-- Search Widget -->
+               <div class="card my-4">
                     <h5 class="card-header">Search</h5>
                     <div class="card-body">
+                    <form action="/public/admin/blog/public/home/search" method="POST" role="search">
+                    <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Search for...">
                             <span class="input-group-btn">
-                  <button class="btn btn-secondary" type="button">Go!</button>
-                </span>
+                                <button class="btn btn-secondary" type="submit">Go!</button>
+                          </span>
                         </div>
+                        </form>
                     </div>
                 </div>
 

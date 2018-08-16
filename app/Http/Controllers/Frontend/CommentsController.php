@@ -49,8 +49,7 @@ class CommentsController extends Controller
 
         $request->session()->flash('message.level', 'success');
         $request->session()->flash('message.content', 'Added Category successfully!');
-        return redirect::back()
-            ->with('success',200);
+        return redirect()->route('post.show',$request->post_id)->with('success',200);
     }
 
     /**
@@ -98,21 +97,5 @@ class CommentsController extends Controller
         //
     }
 
-    public function passive($id)
-    {
-        $comment=Comment::find($id);
-        $comment->active=0;
-        $comment->save();
-        return Redirect::back()->with('commentact', 'Comment Activated successfully');
-    }
-
-    public function active($id)
-    {
-        $comment=Comment::find($id);
-        $comment->active=1;
-        $comment->save();
-
-        return Redirect::back()->with('commentdis', 'Comment disactivated successfully');
-    }
 
 }

@@ -26,7 +26,7 @@ Route::any('home/search',function(){
 //Frontend
 
 Route::middleware(['user','auth'])->group(function (){
-    Route::resource('comments','Frontend\CommentsController');
+    Route::resource('comment','Frontend\CommentsController');
     Route::post('comments/{comment_id}/like','Frontend\LikesController@like');
     Route::post('comments/{comment_id}/dislike','Frontend\LikesController@dislike');
 });

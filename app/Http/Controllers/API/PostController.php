@@ -17,7 +17,9 @@ class PostController extends BaseController
      */
     public function index()
     {
-        $posts=Post::with([ 'category' ])
+        $posts=Post::with(['category'=> function ($query) {
+            $query->where('active', 1);
+        }])
             ->withCount(['comments'=> function ($query) {
                 $query->where('active', 1);
             }])
@@ -46,26 +48,7 @@ class PostController extends BaseController
      */
     public function store(Request $request)
     {
-        $input = $request->all();
 
-        $validator = Validator::make($input, [
-            'category_id' => 'required',
-            'title' => 'required',
-            'img' => 'required',
-            'description' => 'required',
-            'content' => 'required',
-            'author_name' => 'required',
-            'source_url' => 'required',
-
-        ]);
-
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());
-        }
-
-        $post = Post::create($input);
-
-        return $this->sendResponse($post->toArray(), 200);
     }
 
     /**
@@ -76,8 +59,6 @@ class PostController extends BaseController
      */
     public function show($id)
     {
-
-
         $post=Post::with([ 'category' ])
             ->withCount(['comments'=> function ($query) {
                 $query->where('active', 1);
@@ -114,35 +95,6 @@ class PostController extends BaseController
     public function update(Request $request, $id)
     {
 
-        $input = $request->all();
-        $post = Post::find($id);
-
-
-        $validator = Validator::make($input, [
-            'title' => 'required',
-            'description' => 'required',
-            'content' => 'required',
-            'img' => 'required',
-            'category_id' => 'required',
-            'source_url' => 'required',
-        ]);
-
-
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());
-        }
-
-
-        $post->title = $input['title'];
-        $post->description = $input['description'];
-        $post->content = $input['content'];
-        $post->img = $input['img'];
-        $post->category_id = $input['category_id'];
-        $post->source_url = $input['source_url'];
-        $post->save();
-
-
-        return $this->sendResponse($post->toArray(), 200);
     }
 
     /**

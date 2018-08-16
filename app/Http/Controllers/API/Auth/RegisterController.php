@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Laravel\Passport\Client;
+use Intervention\Image\Facades\Image;
 
 class RegisterController extends Controller
 {
@@ -38,12 +39,23 @@ class RegisterController extends Controller
             'name' => request('name'),
             'email' => request('email'),
             'country' => request('country'),
-            'img' => request('img'),
             'ip_address' => request('ip_address'),
             'password' =>request('password') ,
             'active' => 1,
             'is_admin' => 0
         ]);
+
+        if($request->img){
+
+            $png_url = "user-".time().".png";
+            $path = public_path()."/uploads/backend/users/".$png_url;
+            $base=base64_decode($request->img);
+            Image::make($base)->save($path);
+            $user->img = $png_url;
+            $user->save();
+ 
+        }
+
 
         $params = [
             'grant_type' => 'password',

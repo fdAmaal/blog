@@ -39,21 +39,7 @@ class CategoryController extends BaseController
      */
     public function store(Request $request)
     {
-        $input = $request->all();
 
-        $validator = Validator::make($input, [
-            'name' => 'required',
-            'img' => 'required'
-
-        ]);
-
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());
-        }
-
-        $category = Category::create($input);
-
-        return $this->sendResponse($category->toArray(), 'Catgory created successfully.');
     }
 
     /**
@@ -103,27 +89,6 @@ class CategoryController extends BaseController
     public function update(Request $request, $id)
     {
 
-
-        $input = $request->all();
-        $category = Category::find($id);
-
-
-        $validator = Validator::make($input, [
-            'name' => 'required',
-            'img' => 'required'
-        ]);
-
-
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());
-        }
-
-        $category->name = $input['name'];
-        $category->img = $input['img'];
-        $category->save();
-
-
-        return $this->sendResponse($category->toArray(), 'Post updated successfully.');
     }
 
     /**

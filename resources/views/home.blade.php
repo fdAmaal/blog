@@ -24,7 +24,7 @@
                     </div>
                     <div class="card-footer text-muted">
                         Posted on {{$post->created_at}} by
-                        <a href="#">{{$post->author_name}}</a>
+                        <b>{{$post->author_name}}</b>   <span style="float:right; font-size:16px; background-color: #2c9e5d; color:white" class="badge bg-green">{{$post->name}}</span>
                     </div>
                 </div>
             @endforeach
@@ -53,8 +53,8 @@
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Search for...">
                             <span class="input-group-btn">
-                  <button class="btn btn-secondary" type="button">Go!</button>
-                </span>
+                                <button class="btn btn-secondary" type="submit">Go!</button>
+                          </span>
                         </div>
                         </form>
                     </div>

@@ -22,7 +22,7 @@ class CategoriesController extends Controller
     {
         $categories= Category::orderBy('created_at','desc')
             ->where('active','=',1)
-            ->paginate(10);
+            ->paginate(8);
 
         return view('Backend.categories.categories',compact('categories'));
     }
@@ -34,8 +34,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        // using Eloquent method to insert data
-        return view('Backend.categories.new');
+
     }
 
     /**
@@ -47,23 +46,6 @@ class CategoriesController extends Controller
     public function store(Request $request)
     {
 
-        $category=new Category;
-        // using Eloquent method to edit data
-        $category->name=$request->name;
-        $category->active=$request ->active;
-        //Upolad image
-        if (!is_null($request->file('img'))) {
-            $file = $request->file('img');
-            $filePath = $file->store('images/categories', 'public');
-        }
-        $category->img = $filePath;
-        $category->active=$request->active;
-        $category->save();
-
-        $request->session()->flash('message.level', 'success');
-        $request->session()->flash('message.content', 'Added Category successfully!');
-        return redirect('/admin/categories')
-            ->with('success',200);
 
     }
 
@@ -80,18 +62,10 @@ class CategoriesController extends Controller
             ->where('category_id',$id)
             ->where('active','=',1)
             ->orderBy('created_at','desc')
-            ->paginate(9);
+            ->paginate(8);
 
-        /*       $categories=Category::with([ 'posts' ])
-            ->with(['posts'=> function ($query) {
-                $query->withCount(['comments'=> function ($query) {
-                    $query->where('active', 1);
-                }])->where('active', 1);
-            }])
-            ->where('id', '=',$id);
-        */
         $name=Category::find($id);
-        $category= Category::withCount(['posts'])->get();
+        $category= Category::withCount(['posts'])->where('active','=',1)->get();
 
         if (is_null($categories)) {
             return $this->sendError('category not found.');
@@ -108,9 +82,7 @@ class CategoriesController extends Controller
      */
     public function edit($id)
     {
-        // using Eloquent method to edit data
-        $category=Category::find($id);
-        return view('Backend.categories.edit',compact('category'));
+ 
     }
 
     /**
@@ -122,24 +94,7 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // using Eloquent method to edit data
-        $category=Category::find($id);
-        $category->name=$request->name;
-        $filePath =$category->img;
 
-        //Upolad image
-        if (!is_null($request->file('img'))) {
-            $file = $request->file('img');
-            $filePath = $file->store('images/categories', 'public');
-        }
-        $category->img = $filePath;
-        $category->active=$request->active;
-        $category->save();
-
-        $request->session()->flash('message.level', 'success');
-        $request->session()->flash('message.content', 'Category updated successfully!');
-        return redirect('/admin/categories')
-            ->with('success',200);
     }
 
     /**
@@ -151,23 +106,6 @@ class CategoriesController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-
-    public function passive($id)
-    {
-        $category=Category::find($id);
-        $category->active=0;
-        $category->save();
-        return Redirect::back()->with('Activated', 'Category Activated successfully');
-    }
-
-    public function active($id)
-    {
-        $category=Category::find($id);
-        $category->active=1;
-        $category->save();
-        return Redirect::back()->with('disactivated', 'Category disactivated successfully');
     }
 
 
